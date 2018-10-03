@@ -1,0 +1,23 @@
+@font-face {
+  font-family: 'Brown';
+  src: url('/fonts/Brown-Light.woff2') format('woff2'), url('/fonts/Brown-Light.woff') format('woff');
+  font-style: normal;
+  font-weight: 300;
+  font-display: optional;
+}
+
+@font-face {
+  font-family: 'Brown';
+  src: url('/fonts/Brown-Regular.woff2') format('woff2'), url('/fonts/Brown-Regular.woff') format('woff');
+  font-style: normal;
+  font-weight: normal;
+  font-display: optional;
+}
+
+@font-face {
+  font-family: 'Relative';
+  src: url('/fonts/Relative-Faux.woff2') format('woff2'), url('/fonts/Relative-Faux.woff') format('woff');
+  font-style: normal;
+  font-weight: normal;
+  font-display: optional;
+}

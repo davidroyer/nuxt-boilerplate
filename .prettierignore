@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.nuxt/
+build/
+lib/
+static/
+*.min.*
+package.json
