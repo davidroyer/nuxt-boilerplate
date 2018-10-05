@@ -52,9 +52,9 @@
   "dependencies": {
     "@fortawesome/fontawesome-free-brands": "^5.0.13",
     "@fortawesome/fontawesome-free-regular": "^5.0.13",
-    "@nuxtjs/pwa": "^2.0.8",
+    "@nuxtjs/pwa": "^2.6.0",
     "@nuxtjs/sitemap": "^0.1.1",
-    "nuxt-edge": "^2.0.0-25452542.7f9d16c",
+    "nuxt": "^2.1.0",
     "nuxt-fontawesome": "^0.2.0",
     "tailwindcss": "^0.5.3"
   }
