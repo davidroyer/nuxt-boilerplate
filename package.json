@@ -14,7 +14,7 @@
     "dev": "cross-env NODE_ENV=development nuxt",
     "build": "cross-env NODE_ENV=production nuxt build",
     "start": "cross-env NODE_ENV=production nuxt start",
-    "generate": "cross-env NODE_ENV=production nuxt generate",
+    "generate": "nuxt generate",
     "lint:js": "cross-env NODE_ENV=production eslint --ext .js,.vue .",
     "lint:css": "cross-env NODE_ENV=production stylelint **/*.{vue,css,scss,sass,less}",
     "lint": "npm-run-all lint:js lint:css"
