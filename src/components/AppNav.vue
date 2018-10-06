@@ -11,6 +11,12 @@
           </span>
         </a>
       </nuxt-link>
+      <nuxt-link to="/examples" 
+tag="li">
+        <a itemprop="url">
+          <span itemprop="name">Examples</span>
+        </a>
+      </nuxt-link>    
     </ul>
   </nav>
 </template>

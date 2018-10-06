@@ -44,24 +44,29 @@ export default {
    * @see https://nuxtjs.org/guide/modules/
    * @see https://pwa.nuxtjs.org/
    */
-  modules: ['@nuxtjs/pwa', '@nuxtjs/sitemap'],
-  // 'nuxt-fontawesome'
-  /**
-   * Font awsome icons
-   * @see https://github.com/vaso2/nuxt-fontawesome
+  modules: ['@nuxtjs/pwa', '@nuxtjs/sitemap', 'nuxt-fontawesome'],
+
+    /**
+   * Nuxt fontawesome module
+   * @type {Object}
    */
-  // fontawesome: {
-  //   imports: [
-  //     {
-  //       set: '@fortawesome/fontawesome-free-brands',
-  //       icons: ['faFontAwesome']
-  //     },
-  //     {
-  //       set: '@fortawesome/fontawesome-free-regular',
-  //       icons: ['faBell']
-  //     }
-  //   ]
-  // },
+  fontawesome: {
+    component: 'v-icon',
+    imports: [
+      {
+        set: '@fortawesome/free-brands-svg-icons',
+        icons: config.fontAwesomeIcons.brands
+      },
+      {
+        set: '@fortawesome/free-regular-svg-icons',
+        icons: config.fontAwesomeIcons.regular
+      },
+      {
+        set: '@fortawesome/free-solid-svg-icons',
+        icons: config.fontAwesomeIcons.solid
+      }
+    ]
+  },
 
   /**
    * Sitemap
