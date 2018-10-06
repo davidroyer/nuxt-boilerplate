@@ -144,25 +144,25 @@ export default {
      */
     plugins: [
       new StylelintPlugin(),
-      new PurgecssPlugin({
-        paths: glob.sync([
-          path.join(__dirname, './src/pages/**/*.vue'),
-          path.join(__dirname, './src/layouts/**/*.vue'),
-          path.join(__dirname, './src/components/**/*.vue')
-        ]),
-        extractors: [
-          {
-            extractor: class TailwindExtractor {
-              static extract(content) {
-                return content.match(/[A-z0-9-:/]+/g) || []
-              }
-            },
-            extensions: ['html', 'js', 'vue', 'css', 'scss']
-          }
-        ],
-        whitelist: ['html', 'body', 'svg'],
-        whitelistPatterns: purgecssWhitelistPatterns
-      })
+      // new PurgecssPlugin({
+      //   paths: glob.sync([
+      //     path.join(__dirname, './src/pages/**/*.vue'),
+      //     path.join(__dirname, './src/layouts/**/*.vue'),
+      //     path.join(__dirname, './src/components/**/*.vue')
+      //   ]),
+      //   extractors: [
+      //     {
+      //       extractor: class TailwindExtractor {
+      //         static extract(content) {
+      //           return content.match(/[A-z0-9-:/]+/g) || []
+      //         }
+      //       },
+      //       extensions: ['html', 'js', 'vue', 'css', 'scss']
+      //     }
+      //   ],
+      //   whitelist: ['html', 'body', 'svg'],
+      //   whitelistPatterns: purgecssWhitelistPatterns
+      // })
     ],
 
     /**
