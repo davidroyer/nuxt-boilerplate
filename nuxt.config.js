@@ -5,6 +5,17 @@ import aliases from './aliases.config'
 import { colors } from './tailwind.config'
 import PurgecssPlugin from 'purgecss-webpack-plugin'
 import StylelintPlugin from 'stylelint-webpack-plugin'
+const purgecssWhitelistPatterns = [
+  /^__/,
+  /^fa/,
+  /^v-/,
+  /^page-/,
+  /^nuxt/,
+  /^scale/,
+  /^slide/,
+  /^enter/,
+  /^leave/
+]
 
 export default {
   /**
@@ -146,11 +157,11 @@ export default {
                 return content.match(/[A-z0-9-:/]+/g) || []
               }
             },
-            extensions: ['html', 'js', 'vue', 'css']
+            extensions: ['html', 'js', 'vue', 'css', 'scss']
           }
         ],
-        whitelist: ['html', 'body'],
-        whitelistPatterns: [/(^__|^nuxt|^fa)/]
+        whitelist: ['html', 'body', 'svg'],
+        whitelistPatterns: purgecssWhitelistPatterns
       })
     ],
 
@@ -171,8 +182,8 @@ export default {
       /**
        * Enable tree shaking for FontAwsome
        */
-      config.resolve.alias['@fortawesome/fontawesome-free-brands$'] = '@fortawesome/fontawesome-free-brands/shakable.es.js'
-      config.resolve.alias['@fortawesome/fontawesome-free-regular$'] = '@fortawesome/fontawesome-free-regular/shakable.es.js'
+      // config.resolve.alias['@fortawesome/fontawesome-free-brands$'] = '@fortawesome/fontawesome-free-brands/shakable.es.js'
+      // config.resolve.alias['@fortawesome/fontawesome-free-regular$'] = '@fortawesome/fontawesome-free-regular/shakable.es.js'
 
       /**
        * Enable postcss style-tag in Vue files
