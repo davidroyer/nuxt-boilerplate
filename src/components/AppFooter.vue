@@ -4,12 +4,12 @@
           itemtype="http://schema.org/WPFooter">
     <!-- <font-awesome-icon :icon="['fab', 'font-awesome']" />
     <font-awesome-icon :icon="['far', 'bell']" /> -->
-    <v-icon style="font-size: 30px" 
-            icon="chevron-right"/>
-    <v-icon style="font-size: 30px" 
-            icon="edit"/>
-    <v-icon style="font-size: 30px" 
-            icon="times-circle"/>    
+    <fa-icon style="font-size: 30px" 
+             icon="chevron-right"/>
+    <fa-icon style="font-size: 30px" 
+             icon="edit"/>
+    <fa-icon style="font-size: 30px" 
+             icon="times-circle"/>
   </footer>
 </template>
 

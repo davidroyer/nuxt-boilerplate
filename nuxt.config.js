@@ -62,7 +62,7 @@ export default {
    * @type {Object}
    */
   fontawesome: {
-    component: 'v-icon',
+    component: 'fa-icon',
     imports: [
       {
         set: '@fortawesome/free-brands-svg-icons',
