@@ -154,9 +154,9 @@ export default {
      * Custom webpack plugins
      * @see https://nuxtjs.org/api/configuration-build#plugins
      */
-    // plugins: [
-    //   new StylelintPlugin(),
-    // ],
+    plugins: [
+      new StylelintPlugin(),
+    ],
 
     /**
      * Extend webpack build progress
@@ -176,16 +176,16 @@ export default {
        * Enable postcss style-tag in Vue files
        * @see https://github.com/nuxt/nuxt.js/issues/3231#issuecomment-381885334
        */
-      // config.module.rules.push({
-      //   test: /\.postcss$/,
-      //   use: [
-      //     'vue-style-loader',
-      //     'css-loader',
-      //     {
-      //       loader: 'postcss-loader'
-      //     }
-      //   ]
-      // })
+      config.module.rules.push({
+        test: /\.postcss$/,
+        use: [
+          'vue-style-loader',
+          'css-loader',
+          {
+            loader: 'postcss-loader'
+          }
+        ]
+      })
 
       if (!isDev) {
         config.plugins.push(
