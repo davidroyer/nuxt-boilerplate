@@ -187,7 +187,7 @@ export default {
       //   ]
       // })
 
-      if (!isDev) {
+      if (true) {
         config.plugins.push(
           /**
            * PurgeCSS
@@ -206,7 +206,7 @@ export default {
                 extensions: ['html', 'js', 'vue', 'css', 'scss']
               }
             ],
-            whitelist: ['html', 'body', 'nuxt-progress'],
+            whitelist: ['html', 'body', 'nuxt-progress', 'svg'],
             whitelistPatterns: purgecssWhitelistPatterns
           })
         )
