@@ -1,12 +1,12 @@
 import path from 'path'
 import glob from 'glob-all'
-import config from './app.config'
+import config from './site.config'
 import aliases from './aliases.config'
 import { colors } from './tailwind.config'
 
-// import PurgecssPlugin from 'purgecss-webpack-plugin'
+import PurgecssPlugin from 'purgecss-webpack-plugin'
 import StylelintPlugin from 'stylelint-webpack-plugin'
-const PurgecssPlugin = require('purgecss-webpack-plugin')
+// const PurgecssPlugin = require('purgecss-webpack-plugin')
 
 class TailwindExtractor {
   static extract(content) {
@@ -15,7 +15,7 @@ class TailwindExtractor {
 }
 const purgecssWhitelistPatterns = [
   /^__/,
-  /^fa/,
+  /^fa-/,
   /^v-/,
   /^page-/,
   /^nuxt/,
@@ -106,24 +106,26 @@ export default {
    * @see https://nuxtjs.org/api/configuration-head
    */
   head: {
-    title: config.name,
-    titleTemplate: `%s - ${config.name}`,
+    titleTemplate: `%s - ${config.title}`,
     htmlAttrs: { lang: config.lang },
     bodyAttrs: { itemscope: true, itemtype: 'http://schema.org/WebPage' },
+    
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1, shrink-to-fit=no' },
       { 'http-equiv': 'x-ua-compatible', content: 'ie=edge' },
-      { hid: 'description', name: 'description', content: config.description }
+      { hid: 'description', name: 'description', content: config.description },
+      // { hid: 'robots', name: 'robots', content: config.index === false ? 'noindex,nofollow' : 'index,follow' },
+      { property: 'og:type', content: 'website' },
+      { property: 'og:site_name', content: config.title },
+      { hid: 'og:title', property: 'og:title', content: config.title },
+      { hid: 'og:description', property: 'og:description', content: config.description },
+      { hid: 'og:image', property: 'og:image', content: `/${config.ogImage}` },
+      { hid: 'twitter:title', name: 'twitter:title', content: config.title },
+      { hid: 'twitter:description', name: 'twitter:description', content: config.description },
+      { hid: 'twitter:image', name: 'twitter:image', content: `/${config.ogImage}` }            
     ],
     link: [
-      // https://fonts.googleapis.com/css?family=Vollkorn:400,700
-      // { rel: 'preload', as: 'style', onload: 'this.rel = "stylesheet"', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400' },
-      // <link
-      //   rel="preload"
-      //   as="style"
-      //   onload="this.rel = 'stylesheet'"
-      //   href='https://fonts.googleapis.com/css?family=Roboto:100,900|Material+Icons'>
       { rel: 'preload', href: '/fonts/vollkorn-v8-latin-regular.woff2', as: 'font', type: 'font/woff2' },
       { rel: 'preload', href: '/fonts/vollkorn-v8-latin-700.woff2', as: 'font', type: 'font/woff2' },
       { rel: 'preload', href: '/fonts/open-sans-v15-latin-regular.woff2', as: 'font', type: 'font/woff2' }
