@@ -15,6 +15,7 @@
     "build": "cross-env NODE_ENV=production nuxt build",
     "start": "cross-env NODE_ENV=production nuxt start",
     "generate": "nuxt generate",
+    "serve": "http-server dist",
     "lint:js": "cross-env NODE_ENV=production eslint --ext .js,.vue .",
     "lint:css": "cross-env NODE_ENV=production stylelint **/*.{vue,css,scss,sass,less}",
     "lint": "npm-run-all lint:js lint:css"
@@ -59,7 +60,7 @@
     "nuxt": "^2.1.0",
     "nuxt-fontawesome": "^0.3.0",
     "postcss-typography": "^1.0.0",
-    "tailwindcss": "^0.5.3",
+    "tailwindcss": "^0.6.6",
     "typeface-open-sans": "^0.0.54",
     "typeface-vollkorn": "^0.0.54"
   }

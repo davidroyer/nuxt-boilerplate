@@ -3,8 +3,16 @@ import glob from 'glob-all'
 import config from './app.config'
 import aliases from './aliases.config'
 import { colors } from './tailwind.config'
-import PurgecssPlugin from 'purgecss-webpack-plugin'
+
+// import PurgecssPlugin from 'purgecss-webpack-plugin'
 import StylelintPlugin from 'stylelint-webpack-plugin'
+const PurgecssPlugin = require('purgecss-webpack-plugin')
+
+class TailwindExtractor {
+  static extract(content) {
+    return content.match(/[A-z0-9-:/]+/g) || []
+  }
+}
 const purgecssWhitelistPatterns = [
   /^__/,
   /^fa/,
@@ -16,7 +24,6 @@ const purgecssWhitelistPatterns = [
   /^enter/,
   /^leave/
 ]
-
 export default {
 
 
@@ -35,7 +42,7 @@ export default {
    * @see https://nuxtjs.org/api/configuration-builddir
    */
   srcDir: './src',
-  buildDir: './build',
+  // buildDir: './build',
 
   /**
    * Nprogress
@@ -120,10 +127,6 @@ export default {
       { rel: 'preload', href: '/fonts/vollkorn-v8-latin-regular.woff2', as: 'font', type: 'font/woff2' },
       { rel: 'preload', href: '/fonts/vollkorn-v8-latin-700.woff2', as: 'font', type: 'font/woff2' },
       { rel: 'preload', href: '/fonts/open-sans-v15-latin-regular.woff2', as: 'font', type: 'font/woff2' }
-
-      // { rel: 'preload', href: '/fonts/Brown-Light.woff2', as: 'font', type: 'font/woff2' },
-      // { rel: 'preload', href: '/fonts/Brown-Regular.woff2', as: 'font', type: 'font/woff2' },
-      // { rel: 'preload', href: '/fonts/Relative-Faux.woff2', as: 'font', type: 'font/woff2' }      
     ]
   },
 
@@ -151,28 +154,9 @@ export default {
      * Custom webpack plugins
      * @see https://nuxtjs.org/api/configuration-build#plugins
      */
-    plugins: [
-      new StylelintPlugin(),
-      // new PurgecssPlugin({
-      //   paths: glob.sync([
-      //     path.join(__dirname, './src/pages/**/*.vue'),
-      //     path.join(__dirname, './src/layouts/**/*.vue'),
-      //     path.join(__dirname, './src/components/**/*.vue')
-      //   ]),
-      //   extractors: [
-      //     {
-      //       extractor: class TailwindExtractor {
-      //         static extract(content) {
-      //           return content.match(/[A-z0-9-:/]+/g) || []
-      //         }
-      //       },
-      //       extensions: ['html', 'js', 'vue', 'css', 'scss']
-      //     }
-      //   ],
-      //   whitelist: ['html', 'body', 'svg'],
-      //   whitelistPatterns: purgecssWhitelistPatterns
-      // })
-    ],
+    // plugins: [
+    //   new StylelintPlugin(),
+    // ],
 
     /**
      * Extend webpack build progress
@@ -189,26 +173,44 @@ export default {
       }
 
       /**
-       * Enable tree shaking for FontAwsome
-       */
-      // config.resolve.alias['@fortawesome/fontawesome-free-brands$'] = '@fortawesome/fontawesome-free-brands/shakable.es.js'
-      // config.resolve.alias['@fortawesome/fontawesome-free-regular$'] = '@fortawesome/fontawesome-free-regular/shakable.es.js'
-
-      /**
        * Enable postcss style-tag in Vue files
        * @see https://github.com/nuxt/nuxt.js/issues/3231#issuecomment-381885334
        */
-      config.module.rules.push({
-        test: /\.postcss$/,
-        use: [
-          'vue-style-loader',
-          'css-loader',
-          {
-            loader: 'postcss-loader'
-          }
-        ]
-      })
+      // config.module.rules.push({
+      //   test: /\.postcss$/,
+      //   use: [
+      //     'vue-style-loader',
+      //     'css-loader',
+      //     {
+      //       loader: 'postcss-loader'
+      //     }
+      //   ]
+      // })
 
+      if (!isDev) {
+        config.plugins.push(
+          /**
+           * PurgeCSS
+           * @see https://github.com/FullHuman/purgecss
+           */
+          new PurgecssPlugin({
+            keyframes: false,
+            paths: glob.sync([
+              path.join(__dirname, './src/pages/**/*.vue'),
+              path.join(__dirname, './src/layouts/**/*.vue'),
+              path.join(__dirname, './src/components/**/*.vue')
+            ]),
+            extractors: [
+              {
+                extractor: TailwindExtractor,
+                extensions: ['html', 'js', 'vue', 'css', 'scss']
+              }
+            ],
+            whitelist: ['html', 'body', 'nuxt-progress'],
+            whitelistPatterns: purgecssWhitelistPatterns
+          })
+        )
+      }
       /**
        * Run eslint on save
        */
