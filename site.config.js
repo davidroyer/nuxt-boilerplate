@@ -1,4 +1,5 @@
 const pkg = require('./package')
+// const siteUrl = process.env.NODE_ENV === 'production' ? '' config.url : 'http://localhost:3004'
 
 module.exports = {
   pathPrefix: '/', // Prefix for all links. If you deploy your site to example.com/portfolio your pathPrefix should be "/portfolio"
@@ -10,7 +11,7 @@ module.exports = {
   ogImage: 'share.png',
   version: pkg.version,
   lang: 'en',
-  url: 'http://localhost:3004',
+  url: 'https://nuxt-boilerplate.netlify.com',
   fontAwesomeIcons: {
     brands: ['faTwitter', 'faGithub', 'faLinkedinIn'],
     regular: ['faTimesCircle'],

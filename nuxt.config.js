@@ -3,16 +3,16 @@ import glob from 'glob-all'
 import config from './site.config'
 import aliases from './aliases.config'
 import { colors } from './tailwind.config'
-
 import PurgecssPlugin from 'purgecss-webpack-plugin'
 import StylelintPlugin from 'stylelint-webpack-plugin'
 // const PurgecssPlugin = require('purgecss-webpack-plugin')
-
+const SiteUrl = process.env.NODE_ENV === 'production' ? '' config.url : 'http://localhost:3004'
 class TailwindExtractor {
   static extract(content) {
     return content.match(/[A-z0-9-:/]+/g) || []
   }
 }
+
 const purgecssWhitelistPatterns = [
   /^__/,
   /^fa-/,
@@ -97,7 +97,7 @@ export default {
    */
   sitemap: {
     path: '/sitemap.xml',
-    hostname: config.url,
+    hostname: SiteUrl,
     generate: true
   },
 
@@ -120,10 +120,10 @@ export default {
       { property: 'og:site_name', content: config.title },
       { hid: 'og:title', property: 'og:title', content: config.title },
       { hid: 'og:description', property: 'og:description', content: config.description },
-      { hid: 'og:image', property: 'og:image', content: `/${config.ogImage}` },
+      { hid: 'og:image', property: 'og:image', content: `${SiteUrl}/${config.ogImage}` },
       { hid: 'twitter:title', name: 'twitter:title', content: config.title },
       { hid: 'twitter:description', name: 'twitter:description', content: config.description },
-      { hid: 'twitter:image', name: 'twitter:image', content: `/${config.ogImage}` }            
+      { hid: 'twitter:image', name: 'twitter:image', content: `${SiteUrl}/${config.ogImage}` }            
     ],
     link: [
       { rel: 'preload', href: '/fonts/vollkorn-v8-latin-regular.woff2', as: 'font', type: 'font/woff2' },
