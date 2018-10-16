@@ -18,7 +18,7 @@ html {
 }
 
 body {
-  @apply .font-sans .text-base .bg-white .text-black-shade;
+  @apply .font-body .text-base .bg-white .text-black-shade;
 
   line-height: responsive 1.6rem 2rem;
   line-height-range: config('screens.sm') config('screens.xl');
@@ -34,6 +34,7 @@ h2,
 h3,
 h4 {
   @apply .font-bold;
+  font-family: 'Vollkorn', sans-serif;
 }
 
 img {

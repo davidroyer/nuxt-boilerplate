@@ -18,6 +18,11 @@ const purgecssWhitelistPatterns = [
 ]
 
 export default {
+
+
+   server: {
+    port: 3004, // default: 3000
+  },
   /**
    * Application type
    * @see https://nuxtjs.org/api/configuration-mode/
@@ -106,15 +111,19 @@ export default {
     ],
     link: [
       // https://fonts.googleapis.com/css?family=Vollkorn:400,700
-      { rel: 'preload', as: 'style', onload: 'this.rel = "stylesheet"', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400' },
+      // { rel: 'preload', as: 'style', onload: 'this.rel = "stylesheet"', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400' },
       // <link
       //   rel="preload"
       //   as="style"
       //   onload="this.rel = 'stylesheet'"
       //   href='https://fonts.googleapis.com/css?family=Roboto:100,900|Material+Icons'>
-      { rel: 'preload', href: '/fonts/Brown-Light.woff2', as: 'font', type: 'font/woff2' },
-      { rel: 'preload', href: '/fonts/Brown-Regular.woff2', as: 'font', type: 'font/woff2' },
-      { rel: 'preload', href: '/fonts/Relative-Faux.woff2', as: 'font', type: 'font/woff2' }
+      { rel: 'preload', href: '/fonts/vollkorn-v8-latin-regular.woff2', as: 'font', type: 'font/woff2' },
+      { rel: 'preload', href: '/fonts/vollkorn-v8-latin-700.woff2', as: 'font', type: 'font/woff2' },
+      { rel: 'preload', href: '/fonts/open-sans-v15-latin-regular.woff2', as: 'font', type: 'font/woff2' }
+
+      // { rel: 'preload', href: '/fonts/Brown-Light.woff2', as: 'font', type: 'font/woff2' },
+      // { rel: 'preload', href: '/fonts/Brown-Regular.woff2', as: 'font', type: 'font/woff2' },
+      // { rel: 'preload', href: '/fonts/Relative-Faux.woff2', as: 'font', type: 'font/woff2' }      
     ]
   },
 

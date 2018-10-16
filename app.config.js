@@ -5,7 +5,7 @@ module.exports = {
   description: pkg.description,
   version: pkg.version,
   lang: 'en',
-  url: 'http://localhost:3000',
+  url: 'http://localhost:3004',
   fontAwesomeIcons: {
     brands: ['faTwitter', 'faGithub', 'faLinkedinIn'],
     regular: ['faTimesCircle'],
