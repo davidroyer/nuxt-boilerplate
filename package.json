@@ -58,6 +58,7 @@
     "@nuxtjs/sitemap": "^0.1.1",
     "nuxt": "^2.1.0",
     "nuxt-fontawesome": "^0.3.0",
+    "postcss-typography": "^1.0.0",
     "tailwindcss": "^0.5.3"
   }
 }

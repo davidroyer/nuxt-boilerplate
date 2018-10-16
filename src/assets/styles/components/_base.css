@@ -1,4 +1,4 @@
-*,
+/* *,
 *::before,
 *::after {
   box-sizing: border-box;
@@ -48,7 +48,7 @@ ol {
 
 a {
   color: inherit;
-}
+} */
 
 .page-enter-active,
 .page-leave-active {
@@ -60,3 +60,5 @@ a {
   opacity: 0;
   transform: translate(10px, 0);
 }
+
+@typography

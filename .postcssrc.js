@@ -1,5 +1,5 @@
 const aliases = require('./aliases.config')
-
+const typographyConfig = require('./typography-config')
 module.exports = {
   plugins: [
     // https://github.com/postcss/postcss-import
@@ -14,6 +14,7 @@ module.exports = {
     require('tailwindcss')('./tailwind.config.js'),
     // https://github.com/seaneking/postcss-responsive-type
     require('postcss-responsive-type')(),
+    require('postcss-typography')(typographyConfig),
     // https://github.com/larsenwork/postcss-easing-gradients
     require('postcss-easing-gradients')(),
     // https://github.com/zhouwenbin/postcss-animation
