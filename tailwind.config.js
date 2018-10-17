@@ -197,7 +197,7 @@ module.exports = {
 
   fonts: {
     headings: [
-      'Vollkorn',
+      'Fjalla One',
       'system-ui',
       'BlinkMacSystemFont',
       '-apple-system',
@@ -212,7 +212,7 @@ module.exports = {
       'sans-serif'
     ],
     body: [
-      'Open Sans',
+      'Fjalla One',
       'system-ui',
       'BlinkMacSystemFont',
       '-apple-system',

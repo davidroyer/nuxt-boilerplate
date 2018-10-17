@@ -8,9 +8,9 @@ const theme = {
 
 module.exports = {
 	includeNormalize: true,
-	headerFontFamily: [`Roboto Condensed`, `sans-serif`],
-	bodyFontFamily: [`Mali`, `sans-serif`],
-	headerWeight: 400,
+	headerFontFamily: [`Fjalla One`, `sans-serif`],
+	bodyFontFamily: [`Fjalla One`, `sans-serif`],
+	headerWeight: 600,
 	bodyWeight: 500,
 	blockMarginBottom: 0.6,
 	baseLineHeight: 1.42,

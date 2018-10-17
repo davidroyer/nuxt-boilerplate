@@ -17,10 +17,8 @@ module.exports = {
     
     require('postcss-font-magician')({
       variants: {
-          'Roboto Condensed': {
-              '300': [],
+          'Fjalla One': {
               '400': [],
-              '700': []
           }
       },
       foundries: ['google']
