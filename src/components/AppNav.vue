@@ -2,7 +2,7 @@
   <nav role="navigation"
        itemscope
        itemtype="http://schema.org/SiteNavigationElement">
-    <ul>
+    <ul class="nav-list">
       <nuxt-link to="/"
                  tag="li">
         <a itemprop="url">
@@ -12,7 +12,7 @@
         </a>
       </nuxt-link>
       <nuxt-link to="/examples" 
-tag="li">
+                 tag="li">
         <a itemprop="url">
           <span itemprop="name">Examples</span>
         </a>
@@ -20,3 +20,9 @@ tag="li">
     </ul>
   </nav>
 </template>
+
+<style scoped>
+.nav-list {
+  @apply list-reset;
+}
+</style>

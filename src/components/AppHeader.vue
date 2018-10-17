@@ -15,3 +15,9 @@ export default {
   components: { AppNav, AppLogo }
 }
 </script>
+
+<style>
+header {
+  @apply bg-grey-lighter;
+}
+</style>
