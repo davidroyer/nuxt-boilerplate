@@ -8,10 +8,9 @@ const theme = {
 
 module.exports = {
 	includeNormalize: true,
-	headerFontFamily: [`Fjalla One`, `sans-serif`],
-	bodyFontFamily: [`Fjalla One`, `sans-serif`],
-	headerWeight: 600,
-	bodyWeight: 500,
+	headerFontFamily: [`Vollkorn`, `sans-serif`],
+	bodyFontFamily: [`Open Sans`, `sans-serif`],
+	headerWeight: 400,
 	blockMarginBottom: 0.6,
 	baseLineHeight: 1.42,
 	baseFontSize: `18px`,
