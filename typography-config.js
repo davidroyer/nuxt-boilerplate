@@ -8,7 +8,7 @@ const theme = {
 
 module.exports = {
 	includeNormalize: true,
-	headerFontFamily: [`Vollkorn`, `sans-serif`],
+	headerFontFamily: [`Roboto Condensed`, `sans-serif`],
 	bodyFontFamily: [`Open Sans`, `sans-serif`],
 	headerWeight: 400,
 	blockMarginBottom: 0.6,

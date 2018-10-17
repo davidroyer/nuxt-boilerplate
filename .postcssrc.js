@@ -14,6 +14,18 @@ module.exports = {
     require('tailwindcss')('./tailwind.config.js'),
     // https://github.com/seaneking/postcss-responsive-type
     require('postcss-responsive-type')(),
+    
+    require('postcss-font-magician')({
+      variants: {
+          'Roboto Condensed': {
+              '300': [],
+              '400': [],
+              '700': []
+          }
+      },
+      foundries: ['google']
+    }),
+    
     require('postcss-typography')(typographyConfig),
     // https://github.com/larsenwork/postcss-easing-gradients
     require('postcss-easing-gradients')(),

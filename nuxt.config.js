@@ -5,14 +5,8 @@ import aliases from './aliases.config'
 import { colors } from './tailwind.config'
 import PurgecssPlugin from 'purgecss-webpack-plugin'
 import StylelintPlugin from 'stylelint-webpack-plugin'
-// const PurgecssPlugin = require('purgecss-webpack-plugin')
-const SiteUrl = process.env.NODE_ENV === 'production' ? config.url : 'http://localhost:3004'
-class TailwindExtractor {
-  static extract(content) {
-    return content.match(/[A-z0-9-:/]+/g) || []
-  }
-}
 
+const SiteUrl = process.env.NODE_ENV === 'production' ? config.url : 'http://localhost:3004'
 const purgecssWhitelistPatterns = [
   /^__/,
   /^fa-/,
@@ -24,6 +18,12 @@ const purgecssWhitelistPatterns = [
   /^enter/,
   /^leave/
 ]
+class TailwindExtractor {
+  static extract(content) {
+    return content.match(/[A-z0-9-:/]+/g) || []
+  }
+}
+
 export default {
 
 
