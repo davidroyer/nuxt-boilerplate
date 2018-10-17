@@ -3,7 +3,7 @@ const pkg = require('./package')
 
 module.exports = {
   pathPrefix: '/', // Prefix for all links. If you deploy your site to example.com/portfolio your pathPrefix should be "/portfolio"
-  analyticsID: '',
+  analyticsID: '123',
   title: 'Nuxt Boilerplate - Starting Point For Websites', // Navigation and Site Title
   shortName: 'Nuxt Boilerplate', // Alternative Site title for SEO
   // url: 'https://www.davidroyer.me', // Domain of your site. No trailing slash!

@@ -67,8 +67,12 @@ export default {
    * @see https://nuxtjs.org/guide/modules/
    * @see https://pwa.nuxtjs.org/
    */
-  modules: ['@nuxtjs/pwa', '@nuxtjs/sitemap', 'nuxt-fontawesome'],
+  modules: ['@nuxtjs/google-analytics', '@nuxtjs/pwa', '@nuxtjs/sitemap', 'nuxt-fontawesome'],
 
+
+  'google-analytics': {
+    id: config.analyticsID
+  },
     /**
    * Nuxt fontawesome module
    * @type {Object}
