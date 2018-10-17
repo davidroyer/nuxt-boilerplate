@@ -39,6 +39,7 @@
     "path": "^0.12.7",
     "postcss-animation": "^0.0.12",
     "postcss-easing-gradients": "^3.0.0",
+    "postcss-font-grabber": "^2.0.1",
     "postcss-font-magician": "^2.2.1",
     "postcss-import": "^11.1.0",
     "postcss-nested": "^3.0.0",
