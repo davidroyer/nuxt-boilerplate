@@ -6,9 +6,11 @@
     <h6>Heading 6</h6>
   </section>
 </template>
+<script>
 
-<style>
-body {
-  /* font-family: Roboto; */
+export default {
+  head () {
+    return this.$createSeo('index')
+  }
 }
-</style>
+</script>

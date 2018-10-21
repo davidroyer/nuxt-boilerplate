@@ -51,7 +51,7 @@ export default {
    * Custom Nuxt plugins
    * @see https://nuxtjs.org/guide/plugins
    */
-  // plugins: ['~/plugins/global-components'],
+  plugins: ['~/plugins/meta'],
 
   /**
    * Custom Nuxt modules

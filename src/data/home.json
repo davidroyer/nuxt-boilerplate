@@ -1,0 +1,23 @@
+{
+  "cards": [
+    {
+      "title": "Dance Lessons",
+      "text": "Rates and info for private lessons",
+      "img": "dance-lessons-card.jpg",
+      "link": "/lessons"
+    },
+    {
+      "title": "Dance Classes",
+      "text": "Rates and info for group classes",
+      "img": "dance-classes-card.jpg",
+      "alt": "Group Classes Info",
+      "link": "/classes"
+    },
+    {
+      "title": "Wedding Lessons",
+      "text": "Make your wedding dance memorable",
+      "img": "wedding-lessons-card.jpg",
+      "link": "/weddings"
+    }
+  ]
+}
