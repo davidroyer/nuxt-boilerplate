@@ -7,17 +7,7 @@ import PurgecssPlugin from 'purgecss-webpack-plugin'
 import StylelintPlugin from 'stylelint-webpack-plugin'
 
 const SiteUrl = process.env.NODE_ENV === 'production' ? config.url : 'http://localhost:3004'
-const purgecssWhitelistPatterns = [
-  /^__/,
-  /^fa-/,
-  /^v-/,
-  /^page-/,
-  /^nuxt/,
-  /^scale/,
-  /^slide/,
-  /^enter/,
-  /^leave/
-]
+const purgecssWhitelistPatterns = [/^__/, /^fa-/, /^v-/, /^page-/, /^nuxt/, /^scale/, /^slide/, /^enter/, /^leave/]
 class TailwindExtractor {
   static extract(content) {
     return content.match(/[A-z0-9-:/]+/g) || []
@@ -25,10 +15,8 @@ class TailwindExtractor {
 }
 
 export default {
-
-
-   server: {
-    port: 3004, // default: 3000
+  server: {
+    port: 3004 // default: 3000
   },
   /**
    * Application type
@@ -60,20 +48,19 @@ export default {
    * Custom Nuxt plugins
    * @see https://nuxtjs.org/guide/plugins
    */
-  plugins: ['~/plugins/global-components'],
+  // plugins: ['~/plugins/global-components'],
 
   /**
    * Custom Nuxt modules
    * @see https://nuxtjs.org/guide/modules/
    * @see https://pwa.nuxtjs.org/
    */
-  modules: ['@nuxtjs/google-analytics', '@nuxtjs/pwa', '@nuxtjs/sitemap', 'nuxt-fontawesome'],
-
+  modules: ['~/modules/global-components', '@nuxtjs/google-analytics', '@nuxtjs/pwa', '@nuxtjs/sitemap', 'nuxt-fontawesome'],
 
   'google-analytics': {
     id: config.analyticsID
   },
-    /**
+  /**
    * Nuxt fontawesome module
    * @type {Object}
    */
@@ -113,7 +100,7 @@ export default {
     titleTemplate: `%s - ${config.title}`,
     htmlAttrs: { lang: config.lang },
     bodyAttrs: { itemscope: true, itemtype: 'http://schema.org/WebPage' },
-    
+
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1, shrink-to-fit=no' },
@@ -127,7 +114,7 @@ export default {
       { hid: 'og:image', property: 'og:image', content: `${SiteUrl}/${config.ogImage}` },
       { hid: 'twitter:title', name: 'twitter:title', content: config.title },
       { hid: 'twitter:description', name: 'twitter:description', content: config.description },
-      { hid: 'twitter:image', name: 'twitter:image', content: `${SiteUrl}/${config.ogImage}` }            
+      { hid: 'twitter:image', name: 'twitter:image', content: `${SiteUrl}/${config.ogImage}` }
     ],
     link: [
       { rel: 'preload', href: '/fonts/vollkorn-v8-latin-regular.woff2', as: 'font', type: 'font/woff2' },
@@ -160,9 +147,7 @@ export default {
      * Custom webpack plugins
      * @see https://nuxtjs.org/api/configuration-build#plugins
      */
-    plugins: [
-      new StylelintPlugin(),
-    ],
+    plugins: [new StylelintPlugin()],
 
     /**
      * Extend webpack build progress
