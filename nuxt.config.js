@@ -1,7 +1,7 @@
 import path from 'path'
 import glob from 'glob-all'
-import config from './config/site'
 import aliases from './aliases.config'
+import config from './config/site'
 import { colors } from './config/tailwind'
 import PurgecssPlugin from 'purgecss-webpack-plugin'
 import StylelintPlugin from 'stylelint-webpack-plugin'
