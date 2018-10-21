@@ -1,5 +1,7 @@
+const typographyConfig = require('./config/typography')
+const tailwindConfig = require('./config/tailwind')
 const aliases = require('./aliases.config')
-const typographyConfig = require('./typography-config')
+
 module.exports = {
   plugins: [
     // https://github.com/postcss/postcss-import
@@ -11,7 +13,7 @@ module.exports = {
       }
     }),
     // https://tailwindcss.com/docs/configuration
-    require('tailwindcss')('./tailwind.config.js'),
+    require('tailwindcss')(tailwindConfig),
     // https://github.com/seaneking/postcss-responsive-type
     require('postcss-responsive-type')(),
     require('postcss-typography')(typographyConfig),

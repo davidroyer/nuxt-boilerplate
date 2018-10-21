@@ -1,8 +1,8 @@
 import path from 'path'
 import glob from 'glob-all'
-import config from './site.config'
+import config from './config/site'
 import aliases from './aliases.config'
-import { colors } from './tailwind.config'
+import { colors } from './config/tailwind'
 import PurgecssPlugin from 'purgecss-webpack-plugin'
 import StylelintPlugin from 'stylelint-webpack-plugin'
 
@@ -15,6 +15,9 @@ class TailwindExtractor {
 }
 
 export default {
+  
+  watch: ['@@/config/*.js'],
+  
   server: {
     port: 3004 // default: 3000
   },

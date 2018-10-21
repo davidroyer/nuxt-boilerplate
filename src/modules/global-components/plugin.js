@@ -15,7 +15,7 @@ import path from 'path'
 // const requireContextPath = path.relative(modulePluginPath, globalComponentsPath)
 // console.log('requireContextPath: ', requireContextPath)
 
-const requireComponent = require.context('../src/components/global', true, /\.vue$/)
+const requireComponent = require.context('@/components/global', true, /\.vue$/)
 
 requireComponent.keys().forEach(fileName => {
   console.log(fileName)
