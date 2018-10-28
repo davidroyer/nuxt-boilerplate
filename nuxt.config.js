@@ -27,29 +27,43 @@ export default {
       async before(nuxt, buildOptions) {
         const baseURL = 'https://got2dance.wpapi.app/wp-json/wp/v2'
         const instance = axios.create({ baseURL })
-
+        const EndpointsArray = [
+          'posts',
+          'users',
+          'pages'
+        ]
         console.log('STARTING BEFORE HOOK... ')
-        let usersDataFilePath
-        let postsDataFilePath
+        
+        EndpointsArray.forEach(async (endpoint) => {
+          let dataFilePath
+          const {data, request} = await instance.get(`/${endpoint}`)
+          dataFilePath = path.join(`${nuxt.options.srcDir}/api`, request.path + '.json')
+          dataFilePath = dataFilePath.replace('/wp-json/wp/v2', '')        
+          await mkdirp(path.dirname(dataFilePath))
+          fs.writeFileSync(dataFilePath, JSON.stringify(data))
+        }) 
 
-        const usersResponse = await instance.get('/users')
-        const postsResponse = await instance.get('/posts')
+        // let usersDataFilePath
+        // let postsDataFilePath
 
-        usersDataFilePath = path.join(`${nuxt.options.srcDir}/api`, usersResponse.request.path + '.json')
-        usersDataFilePath = usersDataFilePath.replace('/wp-json/wp/v2', '')        
-        postsDataFilePath = path.join(`${nuxt.options.srcDir}/api`, postsResponse.request.path + '.json')
-        postsDataFilePath = postsDataFilePath.replace('/wp-json/wp/v2', '')        
+        // const usersResponse = await instance.get('/users')
+        // const postsResponse = await instance.get('/posts')
 
-        await mkdirp(path.dirname(usersDataFilePath))
-        await mkdirp(path.dirname(postsDataFilePath))
+        // usersDataFilePath = path.join(`${nuxt.options.srcDir}/api`, usersResponse.request.path + '.json')
+        // usersDataFilePath = usersDataFilePath.replace('/wp-json/wp/v2', '')        
+        // postsDataFilePath = path.join(`${nuxt.options.srcDir}/api`, postsResponse.request.path + '.json')
+        // postsDataFilePath = postsDataFilePath.replace('/wp-json/wp/v2', '')        
 
-        fs.writeFileSync(usersDataFilePath, JSON.stringify(usersResponse.data))
-        fs.writeFileSync(postsDataFilePath, JSON.stringify(postsResponse.data))
+        // await mkdirp(path.dirname(usersDataFilePath))
+        // await mkdirp(path.dirname(postsDataFilePath))
+
+        // fs.writeFileSync(usersDataFilePath, JSON.stringify(usersResponse.data))
+        // fs.writeFileSync(postsDataFilePath, JSON.stringify(postsResponse.data))
 
 
-        console.log('nuxt: ', nuxt)
-        console.log('options: ', nuxt.options)
-        console.log('GET DATA HERE!')
+        // console.log('nuxt: ', nuxt)
+        // console.log('options: ', nuxt.options)
+        // console.log('GET DATA HERE!')
       },      
       // before(builder) {
       //   console.log('GET DATA HERE!')
