@@ -1,4 +1,7 @@
 import path from 'path'
+import fs from 'fs'
+import mkdirp from 'mkdirp'
+import axios from 'axios'
 import glob from 'glob-all'
 import aliases from './aliases.config'
 import config from './config/site'
@@ -15,7 +18,44 @@ class TailwindExtractor {
 }
 
 export default {
-  
+  hooks: {
+    build: {
+      done(builder) {
+        const extraFilePath = path.join(builder.nuxt.options.buildDir, 'extra-file')
+        fs.writeFileSync(extraFilePath, 'Something extra')
+      },
+      async before(nuxt, buildOptions) {
+        const baseURL = 'https://got2dance.wpapi.app/wp-json/wp/v2'
+        const instance = axios.create({ baseURL })
+
+        console.log('STARTING BEFORE HOOK... ')
+        let usersDataFilePath
+        let postsDataFilePath
+
+        const usersResponse = await instance.get('/users')
+        const postsResponse = await instance.get('/posts')
+
+        usersDataFilePath = path.join(`${nuxt.options.srcDir}/api`, usersResponse.request.path + '.json')
+        usersDataFilePath = usersDataFilePath.replace('/wp-json/wp/v2', '')        
+        postsDataFilePath = path.join(`${nuxt.options.srcDir}/api`, postsResponse.request.path + '.json')
+        postsDataFilePath = postsDataFilePath.replace('/wp-json/wp/v2', '')        
+
+        await mkdirp(path.dirname(usersDataFilePath))
+        await mkdirp(path.dirname(postsDataFilePath))
+
+        fs.writeFileSync(usersDataFilePath, JSON.stringify(usersResponse.data))
+        fs.writeFileSync(postsDataFilePath, JSON.stringify(postsResponse.data))
+
+
+        console.log('nuxt: ', nuxt)
+        console.log('options: ', nuxt.options)
+        console.log('GET DATA HERE!')
+      },      
+      // before(builder) {
+      //   console.log('GET DATA HERE!')
+      // },     
+    }
+  },  
   watch: ['@@/config/*.js'],
   
   server: {
