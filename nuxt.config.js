@@ -7,7 +7,7 @@ import PurgecssPlugin from 'purgecss-webpack-plugin'
 import StylelintPlugin from 'stylelint-webpack-plugin'
 
 const SiteUrl = process.env.NODE_ENV === 'production' ? config.url : 'http://localhost:3004'
-const purgecssWhitelistPatterns = [/^__/, /^fa-/, /^v-/, /^page-/, /^nuxt/, /^scale/, /^slide/, /^enter/, /^leave/]
+const purgecssWhitelistPatterns = [/^__/, /^fa/, /^v-/, /^page-/, /^nuxt/, /^scale/, /^slide/, /^enter/, /^leave/]
 class TailwindExtractor {
   static extract(content) {
     return content.match(/[A-z0-9-:/]+/g) || []
@@ -58,7 +58,13 @@ export default {
    * @see https://nuxtjs.org/guide/modules/
    * @see https://pwa.nuxtjs.org/
    */
-  modules: ['~/modules/global-components', '@nuxtjs/google-analytics', '@nuxtjs/pwa', '@nuxtjs/sitemap', 'nuxt-fontawesome'],
+  modules: [
+    '~/modules/global-components',
+    '@nuxtjs/google-analytics',
+    '@nuxtjs/pwa',
+    '@nuxtjs/sitemap',
+     'nuxt-fontawesome'
+    ],
 
   'google-analytics': {
     id: config.analyticsID
@@ -68,21 +74,21 @@ export default {
    * @type {Object}
    */
   fontawesome: {
-    component: 'fa-icon',
-    imports: [
-      {
-        set: '@fortawesome/free-brands-svg-icons',
-        icons: config.fontAwesomeIcons.brands
-      },
-      {
-        set: '@fortawesome/free-regular-svg-icons',
-        icons: config.fontAwesomeIcons.regular
-      },
-      {
-        set: '@fortawesome/free-solid-svg-icons',
-        icons: config.fontAwesomeIcons.solid
-      }
-    ]
+    component: 'fa-icon'
+    // imports: [
+    //   {
+    //     set: '@fortawesome/free-brands-svg-icons',
+    //     icons: config.fontAwesomeIcons.brands
+    //   },
+    //   {
+    //     set: '@fortawesome/free-regular-svg-icons',
+    //     icons: config.fontAwesomeIcons.regular
+    //   },
+    //   {
+    //     set: '@fortawesome/free-solid-svg-icons',
+    //     icons: config.fontAwesomeIcons.solid
+    //   }
+    // ]
   },
 
   /**
@@ -200,7 +206,7 @@ export default {
                 extensions: ['html', 'js', 'vue', 'css', 'scss']
               }
             ],
-            whitelist: ['html', 'body', 'nuxt-progress', 'svg', 'svg-inline--fa'],
+            whitelist: ['html', 'body', 'nuxt-progress', 'svg'],
             whitelistPatterns: purgecssWhitelistPatterns
           })
         )
