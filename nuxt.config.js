@@ -106,20 +106,6 @@ export default {
    */
   fontawesome: {
     component: 'fa-icon'
-    // imports: [
-    //   {
-    //     set: '@fortawesome/free-brands-svg-icons',
-    //     icons: config.fontAwesomeIcons.brands
-    //   },
-    //   {
-    //     set: '@fortawesome/free-regular-svg-icons',
-    //     icons: config.fontAwesomeIcons.regular
-    //   },
-    //   {
-    //     set: '@fortawesome/free-solid-svg-icons',
-    //     icons: config.fontAwesomeIcons.solid
-    //   }
-    // ]
   },
 
   /**
