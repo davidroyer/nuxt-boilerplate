@@ -9,8 +9,9 @@ import { colors } from './config/tailwind'
 import PurgecssPlugin from 'purgecss-webpack-plugin'
 import StylelintPlugin from 'stylelint-webpack-plugin'
 
+const wpUrl = 'https://got2dance.wpapi.app'
 const SiteUrl = process.env.NODE_ENV === 'production' ? config.url : 'http://localhost:3004'
-const purgecssWhitelistPatterns = [/^__/, /^fa/, /^v-/, /^page-/, /^nuxt/, /^scale/, /^slide/, /^enter/, /^leave/]
+const purgecssWhitelistPatterns = [/^__/, /^fa/, /^fa-/, /^svg-/, /^v-/, /^page-/, /^nuxt/, /^scale/, /^slide/, /^enter/, /^leave/]
 class TailwindExtractor {
   static extract(content) {
     return content.match(/[A-z0-9-:/]+/g) || []
@@ -43,31 +44,7 @@ export default {
           fs.writeFileSync(dataFilePath, JSON.stringify(data))
         }) 
 
-        // let usersDataFilePath
-        // let postsDataFilePath
-
-        // const usersResponse = await instance.get('/users')
-        // const postsResponse = await instance.get('/posts')
-
-        // usersDataFilePath = path.join(`${nuxt.options.srcDir}/api`, usersResponse.request.path + '.json')
-        // usersDataFilePath = usersDataFilePath.replace('/wp-json/wp/v2', '')        
-        // postsDataFilePath = path.join(`${nuxt.options.srcDir}/api`, postsResponse.request.path + '.json')
-        // postsDataFilePath = postsDataFilePath.replace('/wp-json/wp/v2', '')        
-
-        // await mkdirp(path.dirname(usersDataFilePath))
-        // await mkdirp(path.dirname(postsDataFilePath))
-
-        // fs.writeFileSync(usersDataFilePath, JSON.stringify(usersResponse.data))
-        // fs.writeFileSync(postsDataFilePath, JSON.stringify(postsResponse.data))
-
-
-        // console.log('nuxt: ', nuxt)
-        // console.log('options: ', nuxt.options)
-        // console.log('GET DATA HERE!')
-      },      
-      // before(builder) {
-      //   console.log('GET DATA HERE!')
-      // },     
+      }
     }
   },  
   watch: ['@@/config/*.js'],
