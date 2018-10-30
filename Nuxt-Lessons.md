@@ -73,7 +73,7 @@ Nuxt will restart the server when any `js` files inside the `config` directory a
 watch: ['@@/config/*.js']
 ```
 
-Better Generate Code
+## Generate Routes - Cleaner Code
 
 ```js
   generate: {
@@ -95,3 +95,5 @@ Better Generate Code
     }
   }
 ```
+
+## Adding Examples Page for dev
