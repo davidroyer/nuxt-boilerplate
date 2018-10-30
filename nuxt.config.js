@@ -8,8 +8,9 @@ import config from './config/site'
 import { colors } from './config/tailwind'
 import PurgecssPlugin from 'purgecss-webpack-plugin'
 import StylelintPlugin from 'stylelint-webpack-plugin'
+import WpApi from './src/services/wpapi'
 
-const wpUrl = 'https://got2dance.wpapi.app'
+const wpUrl = 'https://demo1.wpapi.app'
 const SiteUrl = process.env.NODE_ENV === 'production' ? config.url : 'http://localhost:3004'
 const purgecssWhitelistPatterns = [/^__/, /^fa-/, /^svg-/, /^v-/, /^page-/, /^nuxt/, /^scale/, /^slide/, /^enter/, /^leave/]
 class TailwindExtractor {
@@ -18,32 +19,25 @@ class TailwindExtractor {
   }
 }
 
+const wp = new WpApi({
+  wpSiteUrl: wpUrl
+})
+
+
 export default {
   hooks: {
     build: {
-      done(builder) {
-        const extraFilePath = path.join(builder.nuxt.options.buildDir, 'extra-file')
-        fs.writeFileSync(extraFilePath, 'Something extra')
-      },
+      // done(builder) {
+      //   const extraFilePath = path.join(builder.nuxt.options.buildDir, 'extra-file')
+      //   fs.writeFileSync(extraFilePath, 'Something extra')
+      // },
       async before(nuxt, buildOptions) {
-        const baseURL = 'https://got2dance.wpapi.app/wp-json/wp/v2'
-        const instance = axios.create({ baseURL })
-        const EndpointsArray = [
-          'posts',
-          'users',
-          'pages'
-        ]
-        console.log('STARTING BEFORE HOOK... ')
-        
-        EndpointsArray.forEach(async (endpoint) => {
-          let dataFilePath
-          const {data, request} = await instance.get(`/${endpoint}`)
-          dataFilePath = path.join(`${nuxt.options.srcDir}/api`, request.path + '.json')
-          dataFilePath = dataFilePath.replace('/wp-json/wp/v2', '')        
-          await mkdirp(path.dirname(dataFilePath))
-          fs.writeFileSync(dataFilePath, JSON.stringify(data))
-        }) 
+        const PostTypes = await wp.postTypes();
+        console.log('POSTTYPES: ', PostTypes)
 
+        const postTypesPath = path.join(`${nuxt.options.srcDir}/api/post-types.json`) 
+        await mkdirp(path.dirname(postTypesPath))
+        fs.writeFileSync(postTypesPath, JSON.stringify(PostTypes))
       }
     }
   },  
@@ -58,6 +52,9 @@ export default {
    */
   mode: 'universal',
 
+  env: {
+    apiBaseUrl: wpUrl
+  },
   /**
    * Custom source and build directories
    * @see https://nuxtjs.org/api/configuration-srcdir
@@ -82,7 +79,7 @@ export default {
    * Custom Nuxt plugins
    * @see https://nuxtjs.org/guide/plugins
    */
-  plugins: ['~/plugins/meta'],
+  plugins: ['~/plugins/meta', '~/plugins/wp'],
 
   /**
    * Custom Nuxt modules
@@ -94,9 +91,13 @@ export default {
     '@nuxtjs/google-analytics',
     '@nuxtjs/pwa',
     '@nuxtjs/sitemap',
-     'nuxt-fontawesome'
+     'nuxt-fontawesome',
+    // 'wpapi-js',
     ],
 
+    // wpapi: {
+    //   url: 'https://got2dance.wpapi.app'
+    // },
   'google-analytics': {
     id: config.analyticsID
   },
@@ -154,8 +155,23 @@ export default {
    * @see https://nuxtjs.org/api/configuration-generate
    */
   generate: {
-    dist: './dist',
-    interval: 1
+    async routes() {
+      let routesArray = []
+      const Endpoints = [
+        'posts',
+        'pages',
+        'projects'
+      ]
+      const PostTypes = await wp.postTypes()
+      wp._createCustomPostRoutes(PostTypes)
+
+      for (const endpoint of Endpoints) {
+        const endpointData = await wp[endpoint]()
+        const endpointRoutes = endpointData.map(endpointItem => `/${endpoint}/${endpointItem.slug}`)
+        routesArray.push(...endpointRoutes)
+      }
+      return routesArray
+    }
   },
 
   /**
