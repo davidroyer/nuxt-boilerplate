@@ -11,7 +11,7 @@
 <script>
 export default {
   async asyncData({ app, params }) {
-    const post = await app.$wp.post(`${params.slug}`)
+    const post = await app.$wp.post(params.slug)
     return {
       post
     }

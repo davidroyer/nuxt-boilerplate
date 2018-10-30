@@ -11,7 +11,7 @@
 <script>
 export default {
   async asyncData({ app, params }) {
-    const project = await app.$wp.project(`${params.slug}`)
+    const project = await app.$wp.project(params.slug)
     return {
       project
     }
