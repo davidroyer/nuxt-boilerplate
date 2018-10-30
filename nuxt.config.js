@@ -162,8 +162,7 @@ export default {
         'pages',
         'projects'
       ]
-      const PostTypes = await wp.postTypes()
-      wp._createCustomPostRoutes(PostTypes)
+      wp._createCustomPostRoutes(await wp.postTypes())
 
       for (const endpoint of Endpoints) {
         const endpointData = await wp[endpoint]()
