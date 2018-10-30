@@ -7,8 +7,7 @@
   "private": false,
   "browserslist": [
     ">1%",
-    "not ie 11",
-    "not op_mini all"
+    "not ie 8"
   ],
   "scripts": {
     "dev": "cross-env NODE_ENV=development nuxt",
