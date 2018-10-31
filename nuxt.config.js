@@ -1,7 +1,6 @@
 import path from 'path'
 import fs from 'fs'
 import mkdirp from 'mkdirp'
-import axios from 'axios'
 import glob from 'glob-all'
 import aliases from './aliases.config'
 import config from './config/site'
@@ -27,14 +26,8 @@ const wp = new WpApi({
 export default {
   hooks: {
     build: {
-      // done(builder) {
-      //   const extraFilePath = path.join(builder.nuxt.options.buildDir, 'extra-file')
-      //   fs.writeFileSync(extraFilePath, 'Something extra')
-      // },
       async before(nuxt, buildOptions) {
         const PostTypes = await wp.postTypes();
-        console.log('POSTTYPES: ', PostTypes)
-
         const postTypesPath = path.join(`${nuxt.options.srcDir}/api/post-types.json`) 
         await mkdirp(path.dirname(postTypesPath))
         fs.writeFileSync(postTypesPath, JSON.stringify(PostTypes))
