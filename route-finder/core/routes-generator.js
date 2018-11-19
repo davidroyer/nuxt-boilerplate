@@ -5,7 +5,7 @@ export async function routes() {
       'pages',
       'projects'
     ]
-    wp._createCustomPostRoutes(await wp.postTypes())
+    wp.createRoutes(await wp.postTypes())
 
     for (const endpoint of Endpoints) {
       const endpointData = await wp[endpoint]()

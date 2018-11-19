@@ -6,12 +6,12 @@ const apiBaseUrl = process.env.apiBaseUrl
  * Set `$wp` on the `app` instance
  * This way we can use it in middleware and pages `asyncData`/`fetch`
  */
-export default ({ app }, inject) => {
+export default (ctx, inject) => {
   const wp = new WpApi({
-    wpSiteUrl: apiBaseUrl
+    url: apiBaseUrl
   })
-  wp._createCustomPostRoutes(PostTypes)
-
-  app.$wp = wp
+  wp.createRoutes(PostTypes)
+  console.log('NEW TEST: ', wp)
+  ctx.$wp = wp
   inject('wp', wp)
 }

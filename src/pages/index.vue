@@ -21,8 +21,15 @@ export default {
   async asyncData ({ app }) {
     console.log(app.$wp)
     const projects = await app.$wp.projects()
-    const pages = await app.$wp.pages()
-    const posts = await app.$wp.posts()
+    const pages = await app.$wp.pages({
+      params: {
+        _embed: true
+      }
+    })
+    const posts = await app.$wp.posts({
+      _fields: ['id', 'slug'],
+      per_page: 5
+    })
     return {
       projects,
       pages,

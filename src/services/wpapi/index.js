@@ -14,7 +14,7 @@ export default class WpApi {
      * Set up predefined resources methods.
      */
     this._createDefaultResourceRoutes(Resources)
-    // this._createCustomPostRoutes()
+    // this.createRoutes()
   }
 
   /**
@@ -31,7 +31,7 @@ export default class WpApi {
    * Create base url.
    */
   _createBaseUrl() {
-    return `${this.options.wpSiteUrl}/wp-json/wp/v2/`
+    return `${this.options.url}/wp-json/wp/v2/`
   }
 
   /**
@@ -39,9 +39,7 @@ export default class WpApi {
    */
   setConfig(options) {
     const requestConfig = {
-      params: {
-        ...options
-      }
+      params: options
     }
     return requestConfig
   }
@@ -60,12 +58,12 @@ export default class WpApi {
   }
 
   async allSiteData() {
-    const { data } = await this.axios.get(`${this.options.wpSiteUrl}/wp-json`)
+    const { data } = await this.axios.get(`${this.options.url}/wp-json`)
     return data
   }
 
   async siteData() {
-    const { data } = await this.axios.get(`${this.options.wpSiteUrl}/wp-json`)
+    const { data } = await this.axios.get(`${this.options.url}/wp-json`)
     const { name, description, url, home, gmt_offset, timezone_string } = data
     return { name, description, url, home, gmt_offset, timezone_string }
   }
@@ -84,14 +82,14 @@ export default class WpApi {
         }
       } else {
         this[singleName] = async slug => {
-          const { data } = await this.axios.get(`${collectionName}/?slug=${slug}&_embed`)
+          const { data } = await this.axios.get(`${collectionName}/?slug=${slug}`)
           return data[0]
         }
       }
     })
   }
 
-  async _createCustomPostRoutes(PostTypes) {
+  async createRoutes(PostTypes) {
     // const PostTypes = await this.postTypes()
 
     Object.entries(PostTypes).forEach(([key, postObject]) => {
@@ -102,7 +100,7 @@ export default class WpApi {
       }
 
       this[`${key}`] = async slug => {
-        const { data } = await this.axios.get(`${rest_base}/?slug=${slug}&_embed`)
+        const { data } = await this.axios.get(`${rest_base}/?slug=${slug}`)
         return data[0]
       }
     })
