@@ -7,9 +7,8 @@ import config from './config/site'
 import { colors } from './config/tailwind'
 import PurgecssPlugin from 'purgecss-webpack-plugin'
 import StylelintPlugin from 'stylelint-webpack-plugin'
-import WpApi from './src/services/wpapi'
 
-const wpUrl = 'https://demo1.wpapi.app'
+
 const SiteUrl = process.env.NODE_ENV === 'production' ? config.url : 'http://localhost:3004'
 const purgecssWhitelistPatterns = [/^__/, /^fa-/, /^svg-/, /^v-/, /^page-/, /^nuxt/, /^scale/, /^slide/, /^enter/, /^leave/]
 class TailwindExtractor {
@@ -18,21 +17,12 @@ class TailwindExtractor {
   }
 }
 
-const wp = new WpApi({
-  url: wpUrl
-})
 
 
 export default {
   hooks: {
     build: {
-      async before(nuxt, buildOptions) {
-        const PostTypes = await wp.postTypes();
-        const postTypesPath = path.join(`${nuxt.options.srcDir}/api/post-types.json`) 
-        await mkdirp(path.dirname(postTypesPath))
-        fs.writeFileSync(postTypesPath, JSON.stringify(PostTypes))
-        nuxt.options.env.postTypesPath = postTypesPath
-      }
+      async before(nuxt, buildOptions) {}
     }
   },  
   watch: ['@@/config/*.js'],
@@ -47,7 +37,6 @@ export default {
   mode: 'universal',
 
   env: {
-    apiBaseUrl: wpUrl
   },
   /**
    * Custom source and build directories
@@ -73,7 +62,7 @@ export default {
    * Custom Nuxt plugins
    * @see https://nuxtjs.org/guide/plugins
    */
-  plugins: ['~/plugins/meta', '~/plugins/wp'],
+  plugins: ['~/plugins/meta'],
 
   /**
    * Custom Nuxt modules
@@ -86,12 +75,8 @@ export default {
     '@nuxtjs/pwa',
     '@nuxtjs/sitemap',
      'nuxt-fontawesome',
-    // 'wpapi-js',
     ],
 
-    // wpapi: {
-    //   url: 'https://demo1.wpapi.app'
-    // },
   'google-analytics': {
     id: config.analyticsID
   },
@@ -148,26 +133,7 @@ export default {
    * Static site generation
    * @see https://nuxtjs.org/api/configuration-generate
    */
-  generate: {
-    // async routes() {
-    //   let routesArray = []
-    //   const Endpoints = [
-    //     'posts',
-    //     'pages',
-    //     'projects'
-    //   ]
- 
-    //   // wp.createRoutes(require('./src/api/post-types'))
-    //   wp.createRoutes(await wp.postTypes())
-
-    //   for (const endpoint of Endpoints) {
-    //     const endpointData = await wp[endpoint]()
-    //     const endpointRoutes = endpointData.map(endpointItem => `/${endpoint}/${endpointItem.slug}`)
-    //     routesArray.push(...endpointRoutes)
-    //   }
-    //   return routesArray
-    // }
-  },
+  generate: {},
 
   /**
    * Webpack build process

@@ -17,26 +17,7 @@
           <span itemprop="name">Examples</span>
         </a>
       </nuxt-link>
-      <nuxt-link to="/projects" 
-                 tag="li">
-        <a itemprop="url">
-          <span itemprop="name">Projects</span>
-        </a>
-      </nuxt-link>
-
-      <nuxt-link to="/pages" 
-                 tag="li">
-        <a itemprop="url">
-          <span itemprop="name">Pages</span>
-        </a>
-      </nuxt-link>
-      <nuxt-link to="/posts" 
-                 tag="li">
-        <a itemprop="url">
-          <span itemprop="name">Posts</span>
-        </a>
-      </nuxt-link>             
-    </nuxt-link></ul>
+    </ul>
   </nav>
 </template>
 
