@@ -7,7 +7,7 @@ import config from './config/site'
 import { colors } from './config/tailwind'
 import PurgecssPlugin from 'purgecss-webpack-plugin'
 import StylelintPlugin from 'stylelint-webpack-plugin'
-import WpApi from './src/services/wpapi'
+// import WpApi from './src/services/wpapi'
 
 const wpUrl = 'https://demo1.wpapi.app'
 const SiteUrl = process.env.NODE_ENV === 'production' ? config.url : 'http://localhost:3004'
@@ -18,22 +18,23 @@ class TailwindExtractor {
   }
 }
 
-const wp = new WpApi({
-  wpSiteUrl: wpUrl
-})
+// const wp = new WpApi({
+//   wpSiteUrl: wpUrl
+// })
 
 
 export default {
-  hooks: {
-    build: {
-      async before(nuxt, buildOptions) {
-        const PostTypes = await wp.postTypes();
-        const postTypesPath = path.join(`${nuxt.options.srcDir}/api/post-types.json`) 
-        await mkdirp(path.dirname(postTypesPath))
-        fs.writeFileSync(postTypesPath, JSON.stringify(PostTypes))
-      }
-    }
-  },  
+  // hooks: {
+  //   build: {
+  //     async before(nuxt, buildOptions) {
+  //       const PostTypes = await wp.postTypes();
+  //       const postTypesPath = path.join(`${nuxt.options.srcDir}/api/post-types.json`) 
+  //       await mkdirp(path.dirname(postTypesPath))
+  //       fs.writeFileSync(postTypesPath, JSON.stringify(PostTypes))
+  //       nuxt.options.env.postTypesPath = postTypesPath
+  //     }
+  //   }
+  // },  
   watch: ['@@/config/*.js'],
   
   server: {
@@ -72,7 +73,7 @@ export default {
    * Custom Nuxt plugins
    * @see https://nuxtjs.org/guide/plugins
    */
-  plugins: ['~/plugins/meta', '~/plugins/wp'],
+  plugins: ['~/plugins/meta'],
 
   /**
    * Custom Nuxt modules
@@ -85,12 +86,13 @@ export default {
     '@nuxtjs/pwa',
     '@nuxtjs/sitemap',
      'nuxt-fontawesome',
-    // 'wpapi-js',
+    'wpapi-js',
     ],
 
-    // wpapi: {
-    //   url: 'https://got2dance.wpapi.app'
-    // },
+    wpapi: {
+      url: 'https://demo1.wpapi.app'
+      // url: 'https://got2dance.wpapi.app'
+    },
   'google-analytics': {
     id: config.analyticsID
   },
@@ -148,22 +150,24 @@ export default {
    * @see https://nuxtjs.org/api/configuration-generate
    */
   generate: {
-    async routes() {
-      let routesArray = []
-      const Endpoints = [
-        'posts',
-        'pages',
-        'projects'
-      ]
-      wp._createCustomPostRoutes(await wp.postTypes())
+    // async routes() {
+    //   let routesArray = []
+    //   const Endpoints = [
+    //     'posts',
+    //     'pages',
+    //     'projects'
+    //   ]
+ 
+    //   // wp._createCustomPostRoutes(require('./src/api/post-types'))
+    //   wp._createCustomPostRoutes(await wp.postTypes())
 
-      for (const endpoint of Endpoints) {
-        const endpointData = await wp[endpoint]()
-        const endpointRoutes = endpointData.map(endpointItem => `/${endpoint}/${endpointItem.slug}`)
-        routesArray.push(...endpointRoutes)
-      }
-      return routesArray
-    }
+    //   for (const endpoint of Endpoints) {
+    //     const endpointData = await wp[endpoint]()
+    //     const endpointRoutes = endpointData.map(endpointItem => `/${endpoint}/${endpointItem.slug}`)
+    //     routesArray.push(...endpointRoutes)
+    //   }
+    //   return routesArray
+    // }
   },
 
   /**

@@ -21,6 +21,10 @@ export default [
     singleName: 'page'
   },
   {
+    collectionName: 'posts',
+    singleName: 'post'
+  },  
+  {
     collectionName: 'tags',
     singleName: 'tag'
   },

@@ -12,6 +12,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development nuxt",
     "dev:2": "nuxt",
+    "finder": "node route-finder",
     "build": "cross-env NODE_ENV=production nuxt build",
     "start": "cross-env NODE_ENV=production nuxt start",
     "generate": "nuxt generate",
@@ -67,8 +68,10 @@
     "nuxt": "^2.1.0",
     "nuxt-fontawesome": "^0.3.0",
     "postcss-typography": "^1.0.0",
+    "readdirp": "^2.2.1",
     "tailwindcss": "^0.6.6",
     "typeface-open-sans": "^0.0.54",
-    "typeface-vollkorn": "^0.0.54"
+    "typeface-vollkorn": "^0.0.54",
+    "wpapi-js": "^0.0.6"
   }
 }
