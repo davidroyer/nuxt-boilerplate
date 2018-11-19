@@ -1,7 +1,7 @@
 <template>
   <section>
     <h1>
-      Welcome to Nuxt!
+      Welcome to WPAPI!
     </h1>
     <hr>
     <h2>Projects</h2>
@@ -28,7 +28,7 @@ export default {
     })
     const posts = await app.$wp.posts({
       _fields: ['id', 'slug'],
-      per_page: 5
+      per_page: 3
     })
     return {
       projects,
