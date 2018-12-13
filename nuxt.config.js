@@ -83,7 +83,7 @@ export default {
       path.join(__dirname, './src/layouts/**/*.vue'),
       path.join(__dirname, './src/components/**/*.vue')
     ],
-    whitelist: purgecssWhitelistPatterns
+    whitelistPatterns: purgecssWhitelistPatterns
   },
   'google-analytics': {
     id: config.analyticsID
