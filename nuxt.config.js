@@ -74,8 +74,13 @@ export default {
     '@nuxtjs/pwa',
     '@nuxtjs/sitemap',
     'nuxt-fontawesome',
-    'nuxt-purgecss'
+    'nuxt-purgecss',
+    'nuxt-webfontloader'
   ],
+
+  /**
+   * Remove unused CSS Styles, LINK HERE
+   */
   purgeCSS: {
     mode: 'postcss',
     paths: [
@@ -85,6 +90,13 @@ export default {
     ],
     whitelist: purgecssWhitelistPatterns
   },
+
+  webfontloader: {
+    google: {
+      families: ['Open Sans:400', 'Vollkorn:400,700'] // Loads Lato font with weights 400 and 700
+    }
+  },
+
   'google-analytics': {
     id: config.analyticsID
   },
@@ -175,26 +187,26 @@ export default {
         name: 'twitter:image',
         content: `${SiteUrl}/${config.ogImage}`
       }
-    ],
-    link: [{
-        rel: 'preload',
-        href: '/fonts/vollkorn-v8-latin-regular.woff2',
-        as: 'font',
-        type: 'font/woff2'
-      },
-      {
-        rel: 'preload',
-        href: '/fonts/vollkorn-v8-latin-700.woff2',
-        as: 'font',
-        type: 'font/woff2'
-      },
-      {
-        rel: 'preload',
-        href: '/fonts/open-sans-v15-latin-regular.woff2',
-        as: 'font',
-        type: 'font/woff2'
-      }
     ]
+    // link: [{
+    //     rel: 'preload',
+    //     href: '/fonts/vollkorn-v8-latin-regular.woff2',
+    //     as: 'font',
+    //     type: 'font/woff2'
+    //   },
+    //   {
+    //     rel: 'preload',
+    //     href: '/fonts/vollkorn-v8-latin-700.woff2',
+    //     as: 'font',
+    //     type: 'font/woff2'
+    //   },
+    //   {
+    //     rel: 'preload',
+    //     href: '/fonts/open-sans-v15-latin-regular.woff2',
+    //     as: 'font',
+    //     type: 'font/woff2'
+    //   }
+    // ]
   },
 
   /**
