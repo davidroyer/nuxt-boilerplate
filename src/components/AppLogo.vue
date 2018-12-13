@@ -8,7 +8,7 @@
   </div>
 </template>
 
-<style lang="postcss">
+<style>
 .logo-image {
   @apply w-12 h-12;
 }
