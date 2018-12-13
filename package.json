@@ -67,6 +67,7 @@
     "mkdirp": "^0.5.1",
     "nuxt": "^2.1.0",
     "nuxt-fontawesome": "^0.3.0",
+    "nuxt-purgecss": "^0.0.2",
     "postcss-typography": "^1.0.0",
     "readdirp": "^2.2.1",
     "tailwindcss": "^0.6.6",

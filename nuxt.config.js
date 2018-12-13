@@ -4,19 +4,17 @@ import mkdirp from 'mkdirp'
 import glob from 'glob-all'
 import aliases from './aliases.config'
 import config from './config/site'
-import { colors } from './config/tailwind'
+import {
+  colors
+} from './config/tailwind'
 import PurgecssPlugin from 'purgecss-webpack-plugin'
 import StylelintPlugin from 'stylelint-webpack-plugin'
 
+const typographyConfig = require('./config/typography')
+const tailwindConfig = require('./config/tailwind')
 
 const SiteUrl = process.env.NODE_ENV === 'production' ? config.url : 'http://localhost:3004'
 const purgecssWhitelistPatterns = [/^__/, /^fa-/, /^svg-/, /^v-/, /^page-/, /^nuxt/, /^scale/, /^slide/, /^enter/, /^leave/]
-class TailwindExtractor {
-  static extract(content) {
-    return content.match(/[A-z0-9-:/]+/g) || []
-  }
-}
-
 
 
 export default {
@@ -24,9 +22,9 @@ export default {
     build: {
       async before(nuxt, buildOptions) {}
     }
-  },  
+  },
   watch: ['@@/config/*.js'],
-  
+
   server: {
     port: 3004 // default: 3000
   },
@@ -36,8 +34,7 @@ export default {
    */
   mode: 'universal',
 
-  env: {
-  },
+  env: {},
   /**
    * Custom source and build directories
    * @see https://nuxtjs.org/api/configuration-srcdir
@@ -50,7 +47,9 @@ export default {
    * Nprogress
    * @see https://nuxtjs.org/api/configuration-loading
    */
-  loading: { color: colors.primary },
+  loading: {
+    color: colors.primary
+  },
 
   /**
    * Global CSS
@@ -74,9 +73,18 @@ export default {
     '@nuxtjs/google-analytics',
     '@nuxtjs/pwa',
     '@nuxtjs/sitemap',
-     'nuxt-fontawesome',
+    'nuxt-fontawesome',
+    'nuxt-purgecss'
+  ],
+  purgeCSS: {
+    mode: 'postcss',
+    paths: [
+      path.join(__dirname, './src/pages/**/*.vue'),
+      path.join(__dirname, './src/layouts/**/*.vue'),
+      path.join(__dirname, './src/components/**/*.vue')
     ],
-
+    whitelist: purgecssWhitelistPatterns
+  },
   'google-analytics': {
     id: config.analyticsID
   },
@@ -104,28 +112,88 @@ export default {
    */
   head: {
     titleTemplate: `%s - ${config.title}`,
-    htmlAttrs: { lang: config.lang },
-    bodyAttrs: { itemscope: true, itemtype: 'http://schema.org/WebPage' },
+    htmlAttrs: {
+      lang: config.lang
+    },
+    bodyAttrs: {
+      itemscope: true,
+      itemtype: 'http://schema.org/WebPage'
+    },
 
-    meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1, shrink-to-fit=no' },
-      { 'http-equiv': 'x-ua-compatible', content: 'ie=edge' },
-      { hid: 'description', name: 'description', content: config.description },
+    meta: [{
+        charset: 'utf-8'
+      },
+      {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1, shrink-to-fit=no'
+      },
+      {
+        'http-equiv': 'x-ua-compatible',
+        content: 'ie=edge'
+      },
+      {
+        hid: 'description',
+        name: 'description',
+        content: config.description
+      },
       // { hid: 'robots', name: 'robots', content: config.index === false ? 'noindex,nofollow' : 'index,follow' },
-      { property: 'og:type', content: 'website' },
-      { property: 'og:site_name', content: config.title },
-      { hid: 'og:title', property: 'og:title', content: config.title },
-      { hid: 'og:description', property: 'og:description', content: config.description },
-      { hid: 'og:image', property: 'og:image', content: `${SiteUrl}/${config.ogImage}` },
-      { hid: 'twitter:title', name: 'twitter:title', content: config.title },
-      { hid: 'twitter:description', name: 'twitter:description', content: config.description },
-      { hid: 'twitter:image', name: 'twitter:image', content: `${SiteUrl}/${config.ogImage}` }
+      {
+        property: 'og:type',
+        content: 'website'
+      },
+      {
+        property: 'og:site_name',
+        content: config.title
+      },
+      {
+        hid: 'og:title',
+        property: 'og:title',
+        content: config.title
+      },
+      {
+        hid: 'og:description',
+        property: 'og:description',
+        content: config.description
+      },
+      {
+        hid: 'og:image',
+        property: 'og:image',
+        content: `${SiteUrl}/${config.ogImage}`
+      },
+      {
+        hid: 'twitter:title',
+        name: 'twitter:title',
+        content: config.title
+      },
+      {
+        hid: 'twitter:description',
+        name: 'twitter:description',
+        content: config.description
+      },
+      {
+        hid: 'twitter:image',
+        name: 'twitter:image',
+        content: `${SiteUrl}/${config.ogImage}`
+      }
     ],
-    link: [
-      { rel: 'preload', href: '/fonts/vollkorn-v8-latin-regular.woff2', as: 'font', type: 'font/woff2' },
-      { rel: 'preload', href: '/fonts/vollkorn-v8-latin-700.woff2', as: 'font', type: 'font/woff2' },
-      { rel: 'preload', href: '/fonts/open-sans-v15-latin-regular.woff2', as: 'font', type: 'font/woff2' }
+    link: [{
+        rel: 'preload',
+        href: '/fonts/vollkorn-v8-latin-regular.woff2',
+        as: 'font',
+        type: 'font/woff2'
+      },
+      {
+        rel: 'preload',
+        href: '/fonts/vollkorn-v8-latin-700.woff2',
+        as: 'font',
+        type: 'font/woff2'
+      },
+      {
+        rel: 'preload',
+        href: '/fonts/open-sans-v15-latin-regular.woff2',
+        as: 'font',
+        type: 'font/woff2'
+      }
     ]
   },
 
@@ -139,18 +207,21 @@ export default {
    * Webpack build process
    * @see https://nuxtjs.org/api/configuration-build
    */
-  build: {
-    /**
-     * Extract CSS to seperate file
-     * @see https://nuxtjs.org/api/configuration-build#extractcss
-     */
-    extractCSS: true,
 
-    /**
-     * Custom webpack plugins
-     * @see https://nuxtjs.org/api/configuration-build#plugins
-     */
-    plugins: [new StylelintPlugin()],
+  build: {
+    postcss: {
+      plugins: {
+        tailwindcss: tailwindConfig,
+        'postcss-responsive-type': {},
+        'postcss-typography': typographyConfig,
+        'postcss-easing-gradients': {},
+        'postcss-animation': {},
+        'postcss-nested': {},
+        'postcss-preset-env': {},
+        'css-mqpacker': { sort: true },      
+        autoprefixer: {}
+      }
+    },
 
     /**
      * Extend webpack build progress
@@ -158,53 +229,10 @@ export default {
      * @param {object} config Webpack configuration
      * @param {object} param1 Nuxt context
      */
-    extend(config, { isDev }) {
-      /**
-       * Resolve custom aliases
-       */
-      for (const key in aliases) {
-        config.resolve.alias[key] = aliases[key]
-      }
+    extend(config, {
+      isDev
+    }) {
 
-      /**
-       * Enable postcss style-tag in Vue files
-       * @see https://github.com/nuxt/nuxt.js/issues/3231#issuecomment-381885334
-       */
-      config.module.rules.push({
-        test: /\.postcss$/,
-        use: [
-          'vue-style-loader',
-          'css-loader',
-          {
-            loader: 'postcss-loader'
-          }
-        ]
-      })
-
-      if (!isDev) {
-        config.plugins.push(
-          /**
-           * PurgeCSS
-           * @see https://github.com/FullHuman/purgecss
-           */
-          new PurgecssPlugin({
-            keyframes: false,
-            paths: glob.sync([
-              path.join(__dirname, './src/pages/**/*.vue'),
-              path.join(__dirname, './src/layouts/**/*.vue'),
-              path.join(__dirname, './src/components/**/*.vue')
-            ]),
-            extractors: [
-              {
-                extractor: TailwindExtractor,
-                extensions: ['html', 'js', 'vue', 'css', 'scss']
-              }
-            ],
-            whitelist: ['html', 'body', 'nuxt-progress', 'svg'],
-            whitelistPatterns: purgecssWhitelistPatterns
-          })
-        )
-      }
       /**
        * Run eslint on save
        */

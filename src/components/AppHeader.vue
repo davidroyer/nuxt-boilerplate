@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import AppNav from '@components/AppNav'
-import AppLogo from '@components/AppLogo'
+import AppNav from '@/components/AppNav'
+import AppLogo from '@/components/AppLogo'
 
 export default {
   components: { AppNav, AppLogo }

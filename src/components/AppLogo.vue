@@ -7,10 +7,10 @@
       <span itemscope
             itemtype="http://schema.org/ImageObject"
             itemprop="logo">
-        <img itemprop="url"
+            <!-- <img itemprop="url"
              class="w-12 h-12"
-             src="@images/logo.png"
-             alt="Nuxt">
+             src="assets/images/logo.png"
+             alt="Nuxt"> -->
       </span>
     </router-link>
   </div>
