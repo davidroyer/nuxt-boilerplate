@@ -28,6 +28,7 @@ export default {
   server: {
     port: 3004 // default: 3000
   },
+  
   /**
    * Application type
    * @see https://nuxtjs.org/api/configuration-mode/
@@ -66,7 +67,6 @@ export default {
   /**
    * Custom Nuxt modules
    * @see https://nuxtjs.org/guide/modules/
-   * @see https://pwa.nuxtjs.org/
    */
   modules: [
     '~/modules/global-components',
@@ -79,7 +79,8 @@ export default {
   ],
 
   /**
-   * Remove unused CSS Styles, LINK HERE
+   * Remove unused CSS Styles
+   * @see https://github.com/Developmint/nuxt-purgecss
    */
   purgeCSS: {
     mode: 'postcss',
@@ -91,24 +92,31 @@ export default {
     whitelistPatterns: purgecssWhitelistPatterns
   },
 
+  /**
+   * https://github.com/Developmint/nuxt-webfontloader
+   */
   webfontloader: {
     google: {
       families: ['Open Sans:400', 'Vollkorn:400,700'] // Loads Lato font with weights 400 and 700
     }
   },
+
+  /**
+   * Testing optimizing font loading
+   * @see https://pwa.nuxtjs.org/
+   */
+
   workbox: {
-    runtimeCaching: [
-      {
-        urlPattern: 'https://fonts.(?:googleapis|gstatic).com/(.*)',
-        strategyOptions: {
-          cacheName: 'google-fonts',
-          cacheExpiration: {
-            maxEntries: 30,
-            maxAgeSeconds: 300
-          }
+    runtimeCaching: [{
+      urlPattern: 'https://fonts.(?:googleapis|gstatic).com/(.*)',
+      strategyOptions: {
+        cacheName: 'google-fonts',
+        cacheExpiration: {
+          maxEntries: 30,
+          maxAgeSeconds: 300
         }
       }
-    ]
+    }]
   },
   'google-analytics': {
     id: config.analyticsID
@@ -244,7 +252,9 @@ export default {
         'postcss-animation': {},
         'postcss-nested': {},
         'postcss-preset-env': {},
-        'css-mqpacker': { sort: true },      
+        'css-mqpacker': {
+          sort: true
+        },
         autoprefixer: {}
       }
     },
