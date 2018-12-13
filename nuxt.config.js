@@ -96,7 +96,20 @@ export default {
       families: ['Open Sans:400', 'Vollkorn:400,700'] // Loads Lato font with weights 400 and 700
     }
   },
-
+  workbox: {
+    runtimeCaching: [
+      {
+        urlPattern: 'https://fonts.(?:googleapis|gstatic).com/(.*)',
+        strategyOptions: {
+          cacheName: 'google-fonts',
+          cacheExpiration: {
+            maxEntries: 30,
+            maxAgeSeconds: 300
+          }
+        }
+      }
+    ]
+  },
   'google-analytics': {
     id: config.analyticsID
   },
