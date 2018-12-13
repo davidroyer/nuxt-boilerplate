@@ -212,6 +212,7 @@ export default {
     postcss: {
       plugins: {
         tailwindcss: tailwindConfig,
+        'postcss-import': {},
         'postcss-responsive-type': {},
         'postcss-typography': typographyConfig,
         'postcss-easing-gradients': {},
