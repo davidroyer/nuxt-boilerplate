@@ -1,7 +1,5 @@
 <template>
-  <header role="banner"
-          itemscope
-          itemtype="http://schema.org/WPHeader">
+  <header role="banner" itemscope itemtype="http://schema.org/WPHeader">
     <app-logo />
     <app-nav />
   </header>
@@ -18,6 +16,6 @@ export default {
 
 <style>
 header {
-  @apply bg-grey-lighter;
+  @apply bg-grey-darker;
 }
 </style>

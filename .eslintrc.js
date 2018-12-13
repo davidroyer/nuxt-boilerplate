@@ -27,7 +27,7 @@ module.exports = {
     'arrow-parens': 0,
     // Allow exactly one attribute on each line
     'vue/max-attributes-per-line': [
-      2,
+      4,
       {
         singleline: 1,
         multiline: {
