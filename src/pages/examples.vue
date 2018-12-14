@@ -9,9 +9,7 @@
              size="6x" />       
     <h1>Hanc quoque iucunditatem, si vis, transfer in animum;</h1>
     <label for="text1">Text Field</label>
-    <input id="text1" 
-           type="text" 
-name="text1">
+    <input id="text1" type="text" name="text1" class="border-grey border-2">
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. <b>Quam ob rem tandem, inquit, non satisfacit?</b> <b>Si longus, levis dictata sunt.</b> Sin kakan malitiam dixisses, ad aliud nos unum certum vitium consuetudo Latina traduceret. Si quae forte-possumus. </p>
 
     <p>Non quaero, quid dicat, sed quid convenienter possit rationi et sententiae suae dicere. Quantum Aristoxeni ingenium consumptum videmus in musicis? <code>Hunc vos beatum;</code> Atqui iste locus est, Piso, tibi etiam atque etiam confirmandus, inquam; Cum id quoque, ut cupiebat, audivisset, evelli iussit eam, qua erat transfixus, hastam. Quid in isto egregio tuo officio et tanta fide-sic enim existimo-ad corpus refers? Sint ista Graecorum; Tu quidem reddes; An est aliquid per se ipsum flagitiosum, etiamsi nulla comitetur infamia? </p>

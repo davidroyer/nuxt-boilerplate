@@ -1,21 +1,24 @@
 import path from 'path'
-import fs from 'fs'
-import mkdirp from 'mkdirp'
-import glob from 'glob-all'
-import aliases from './aliases.config'
 import config from './config/site'
-import {
-  colors
-} from './config/tailwind'
-import PurgecssPlugin from 'purgecss-webpack-plugin'
-import StylelintPlugin from 'stylelint-webpack-plugin'
+import { colors } from './config/tailwind'
 
 const typographyConfig = require('./config/typography')
 const tailwindConfig = require('./config/tailwind')
 
-const SiteUrl = process.env.NODE_ENV === 'production' ? config.url : 'http://localhost:3004'
-const purgecssWhitelistPatterns = [/^__/, /^fa-/, /^svg-/, /^v-/, /^page-/, /^nuxt/, /^scale/, /^slide/, /^enter/, /^leave/]
-
+const SiteUrl =
+  process.env.NODE_ENV === 'production' ? config.url : 'http://localhost:3004'
+const purgecssWhitelistPatterns = [
+  /^__/,
+  /^fa-/,
+  /^svg-/,
+  /^v-/,
+  /^page-/,
+  /^nuxt/,
+  /^scale/,
+  /^slide/,
+  /^enter/,
+  /^leave/
+]
 
 export default {
   hooks: {
@@ -23,34 +26,26 @@ export default {
       async before(nuxt, buildOptions) {}
     }
   },
+
+  /**
+   * Will automatically restart server if one of config file changes
+   */
   watch: ['@@/config/*.js'],
 
-  server: {
-    port: 3004 // default: 3000
-  },
-  
-  /**
-   * Application type
-   * @see https://nuxtjs.org/api/configuration-mode/
-   */
-  mode: 'universal',
-
-  env: {},
   /**
    * Custom source and build directories
    * @see https://nuxtjs.org/api/configuration-srcdir
    * @see https://nuxtjs.org/api/configuration-builddir
    */
   srcDir: './src',
-  // buildDir: './build',
 
   /**
    * Nprogress
    * @see https://nuxtjs.org/api/configuration-loading
    */
-  loading: {
-    color: colors.primary
-  },
+  // loading: {
+  //   color: colors.primary
+  // },
 
   /**
    * Global CSS
@@ -87,7 +82,8 @@ export default {
     paths: [
       path.join(__dirname, './src/pages/**/*.vue'),
       path.join(__dirname, './src/layouts/**/*.vue'),
-      path.join(__dirname, './src/components/**/*.vue')
+      path.join(__dirname, './src/components/**/*.vue'),
+      path.join(__dirname, './src/plugins/**/*.js')
     ],
     whitelistPatterns: purgecssWhitelistPatterns
   },
@@ -107,16 +103,18 @@ export default {
    */
 
   workbox: {
-    runtimeCaching: [{
-      urlPattern: 'https://fonts.(?:googleapis|gstatic).com/(.*)',
-      strategyOptions: {
-        cacheName: 'google-fonts',
-        cacheExpiration: {
-          maxEntries: 30,
-          maxAgeSeconds: 300
+    runtimeCaching: [
+      {
+        urlPattern: 'https://fonts.(?:googleapis|gstatic).com/(.*)',
+        strategyOptions: {
+          cacheName: 'google-fonts',
+          cacheExpiration: {
+            maxEntries: 30,
+            maxAgeSeconds: 300
+          }
         }
       }
-    }]
+    ]
   },
   'google-analytics': {
     id: config.analyticsID
@@ -153,7 +151,8 @@ export default {
       itemtype: 'http://schema.org/WebPage'
     },
 
-    meta: [{
+    meta: [
+      {
         charset: 'utf-8'
       },
       {
@@ -265,10 +264,7 @@ export default {
      * @param {object} config Webpack configuration
      * @param {object} param1 Nuxt context
      */
-    extend(config, {
-      isDev
-    }) {
-
+    extend(config, { isDev }) {
       /**
        * Run eslint on save
        */
