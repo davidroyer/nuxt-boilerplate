@@ -208,25 +208,6 @@ export default {
         content: `${SiteUrl}/${config.ogImage}`
       }
     ]
-    // link: [{
-    //     rel: 'preload',
-    //     href: '/fonts/vollkorn-v8-latin-regular.woff2',
-    //     as: 'font',
-    //     type: 'font/woff2'
-    //   },
-    //   {
-    //     rel: 'preload',
-    //     href: '/fonts/vollkorn-v8-latin-700.woff2',
-    //     as: 'font',
-    //     type: 'font/woff2'
-    //   },
-    //   {
-    //     rel: 'preload',
-    //     href: '/fonts/open-sans-v15-latin-regular.woff2',
-    //     as: 'font',
-    //     type: 'font/woff2'
-    //   }
-    // ]
   },
 
   /**

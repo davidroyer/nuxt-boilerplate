@@ -1,27 +1,4 @@
-/**
- * This injects Tailwind's base styles, which is a combination of
- * Normalize.css and some additional base styles.
- *
- * You can see the styles here:
- * https://github.com/tailwindcss/tailwindcss/blob/master/css/preflight.css
- */
-@import './lib/_tailwind-preflight';
-
-/**
- * This injects any component classes registered by plugins.
- */
-@import './lib/_tailwind-components';
-
-/**
- * Import custom components
- */
-/* @import './components/_fonts'; */
-@import './components/_base';
-
-/**
- * This injects all of Tailwind's utility classes, generated based on your
- * config file.
- *
- * It comes last, so it can override all other styles.
- */
-@import './lib/_tailwind-utilities';
+@import './lib/tw-preflight';
+@import './lib/tw-components';
+@import './components/base';
+@import './lib/tw-utilities';
