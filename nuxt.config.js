@@ -1,24 +1,12 @@
 import path from 'path'
-import config from './config/site'
+import siteConfig from './config/site'
+import purgeConfig from './config/purgecss'
 import { colors } from './config/tailwind'
 
-const typographyConfig = require('./config/typography')
-const tailwindConfig = require('./config/tailwind')
-
 const SiteUrl =
-  process.env.NODE_ENV === 'production' ? config.url : 'http://localhost:3004'
-const purgecssWhitelistPatterns = [
-  /^__/,
-  /^fa-/,
-  /^svg-/,
-  /^v-/,
-  /^page-/,
-  /^nuxt/,
-  /^scale/,
-  /^slide/,
-  /^enter/,
-  /^leave/
-]
+  process.env.NODE_ENV === 'production'
+    ? siteConfig.url
+    : 'http://localhost:3004'
 
 export default {
   hooks: {
@@ -27,124 +15,18 @@ export default {
     }
   },
 
-  /**
-   * Will automatically restart server if one of config file changes
-   */
-  watch: ['@@/config/*.js'],
-
-  /**
-   * Custom source and build directories
-   * @see https://nuxtjs.org/api/configuration-srcdir
-   * @see https://nuxtjs.org/api/configuration-builddir
-   */
   srcDir: './src',
 
-  /**
-   * Nprogress
-   * @see https://nuxtjs.org/api/configuration-loading
-   */
-  // loading: {
-  //   color: colors.primary
-  // },
+  watch: ['@@/config/*.js'],
 
-  /**
-   * Global CSS
-   * @see https://nuxtjs.org/api/configuration-css
-   */
-  css: ['~/assets/styles/main.css'],
-
-  /**
-   * Custom Nuxt plugins
-   * @see https://nuxtjs.org/guide/plugins
-   */
-  plugins: ['~/plugins/meta'],
-
-  /**
-   * Custom Nuxt modules
-   * @see https://nuxtjs.org/guide/modules/
-   */
-  modules: [
-    '~/modules/global-components',
-    '@nuxtjs/google-analytics',
-    '@nuxtjs/pwa',
-    '@nuxtjs/sitemap',
-    'nuxt-fontawesome',
-    'nuxt-purgecss',
-    'nuxt-webfontloader'
-  ],
-
-  /**
-   * Remove unused CSS Styles
-   * @see https://github.com/Developmint/nuxt-purgecss
-   */
-  purgeCSS: {
-    mode: 'postcss',
-    paths: [
-      path.join(__dirname, './src/pages/**/*.vue'),
-      path.join(__dirname, './src/layouts/**/*.vue'),
-      path.join(__dirname, './src/components/**/*.vue'),
-      path.join(__dirname, './src/plugins/**/*.js')
-    ],
-    whitelistPatterns: purgecssWhitelistPatterns
+  loading: {
+    color: colors.primary
   },
 
-  /**
-   * https://github.com/Developmint/nuxt-webfontloader
-   */
-  webfontloader: {
-    google: {
-      families: ['Open Sans:400', 'Vollkorn:400,700'] // Loads Lato font with weights 400 and 700
-    }
-  },
-
-  /**
-   * Testing optimizing font loading
-   * @see https://pwa.nuxtjs.org/
-   */
-
-  workbox: {
-    runtimeCaching: [
-      {
-        urlPattern: 'https://fonts.(?:googleapis|gstatic).com/(.*)',
-        strategyOptions: {
-          cacheName: 'google-fonts',
-          cacheExpiration: {
-            maxEntries: 30,
-            maxAgeSeconds: 300
-          }
-        }
-      }
-    ]
-  },
-  'google-analytics': {
-    id: config.analyticsID
-  },
-  /**
-   * Nuxt fontawesome module
-   * @type {Object}
-   */
-  fontawesome: {
-    component: 'fa-icon'
-  },
-
-  /**
-   * Sitemap
-   * @see https://github.com/nuxt-community/sitemap-module
-   */
-  sitemap: {
-    path: '/sitemap.xml',
-    hostname: SiteUrl,
-    generate: true
-  },
-
-  /**
-   * Head of the page
-   * @see https://nuxtjs.org/api/configuration-head
-   */
   head: {
-    titleTemplate: `%s - ${config.title}`,
+    titleTemplate: `%s - ${siteConfig.title}`,
     htmlAttrs: {
-      lang: config.lang
+      lang: siteConfig.lang
     },
     bodyAttrs: {
       itemscope: true,
@@ -166,97 +48,123 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: config.description
+        content: siteConfig.description
       },
-      // { hid: 'robots', name: 'robots', content: config.index === false ? 'noindex,nofollow' : 'index,follow' },
+      {
+        hid: 'robots',
+        name: 'robots',
+        content:
+          siteConfig.index === false ? 'noindex,nofollow' : 'index,follow'
+      },
       {
         property: 'og:type',
         content: 'website'
       },
       {
         property: 'og:site_name',
-        content: config.title
+        content: siteConfig.title
       },
       {
         hid: 'og:title',
         property: 'og:title',
-        content: config.title
-      },
-      {
-        hid: 'og:description',
-        property: 'og:description',
-        content: config.description
+        content: siteConfig.title
       },
       {
         hid: 'og:image',
         property: 'og:image',
-        content: `${SiteUrl}/${config.ogImage}`
+        content: `${SiteUrl}/${siteConfig.ogImage}`
+      },
+      {
+        hid: 'og:description',
+        property: 'og:description',
+        content: siteConfig.description
       },
       {
         hid: 'twitter:title',
         name: 'twitter:title',
-        content: config.title
-      },
-      {
-        hid: 'twitter:description',
-        name: 'twitter:description',
-        content: config.description
+        content: siteConfig.title
       },
       {
         hid: 'twitter:image',
         name: 'twitter:image',
-        content: `${SiteUrl}/${config.ogImage}`
+        content: `${SiteUrl}/${siteConfig.ogImage}`
+      },
+      {
+        hid: 'twitter:description',
+        name: 'twitter:description',
+        content: siteConfig.description
       }
     ]
   },
 
-  /**
-   * Static site generation
-   * @see https://nuxtjs.org/api/configuration-generate
-   */
-  generate: {},
+  css: ['~/assets/styles/main.css'],
 
-  /**
-   * Webpack build process
-   * @see https://nuxtjs.org/api/configuration-build
-   */
+  plugins: ['~/plugins/meta'],
 
-  build: {
-    postcss: {
-      plugins: {
-        tailwindcss: tailwindConfig,
-        'postcss-import': {},
-        'postcss-responsive-type': {},
-        'postcss-typography': typographyConfig,
-        'postcss-easing-gradients': {},
-        'postcss-animation': {},
-        'postcss-nested': {},
-        'postcss-preset-env': {},
-        'css-mqpacker': {
-          sort: true
-        },
-        autoprefixer: {}
+  modules: [
+    '@nuxtjs/pwa',
+    '@nuxtjs/sitemap',
+    '@nuxtjs/google-analytics',
+    'nuxt-purgecss',
+    'nuxt-fontawesome',
+    'nuxt-webfontloader',
+    '@/modules/global-components'
+  ],
+
+  purgeCSS: purgeConfig,
+
+  webfontloader: {
+    google: {
+      families: ['Open Sans:400', 'Vollkorn:400,700'] // Loads Lato font with weights 400 and 700
+    }
+  },
+
+  workbox: {
+    runtimeCaching: [
+      {
+        urlPattern: 'https://fonts.(?:googleapis|gstatic).com/(.*)',
+        strategyOptions: {
+          cacheName: 'google-fonts',
+          cacheExpiration: {
+            maxEntries: 30,
+            maxAgeSeconds: 300
+          }
+        }
       }
-    },
+    ]
+  },
 
+  'google-analytics': {
+    id: siteConfig.analyticsID
+  },
+
+  fontawesome: {
+    component: 'fa-icon'
+  },
+
+  sitemap: {
+    path: '/sitemap.xml',
+    hostname: SiteUrl,
+    generate: true
+  },
+
+  /**
+   * Extend webpack build progress
+   * @see https://nuxtjs.org/api/configuration-build#extend
+   * @param {object} config Webpack configuration
+   * @param {object} param1 Nuxt context
+   */
+  extend(config, { isDev }) {
     /**
-     * Extend webpack build progress
-     * @see https://nuxtjs.org/api/configuration-build#extend
-     * @param {object} config Webpack configuration
-     * @param {object} param1 Nuxt context
+     * Run eslint on save
      */
-    extend(config, { isDev }) {
-      /**
-       * Run eslint on save
-       */
-      if (isDev && process.client) {
-        config.module.rules.push({
-          enforce: 'pre',
-          test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/
-        })
-      }
+    if (isDev && process.client) {
+      siteConfig.module.rules.push({
+        enforce: 'pre',
+        test: /\.(js|vue)$/,
+        loader: 'eslint-loader',
+        exclude: /(node_modules)/
+      })
     }
   }
 }
