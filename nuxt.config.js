@@ -3,6 +3,19 @@ import siteConfig from './config/site'
 import purgeConfig from './config/purgecss'
 import { colors } from './config/tailwind'
 
+const purgecssWhitelistPatterns = [
+  /^__/,
+  /^fa-/,
+  /^svg-/,
+  /^v-/,
+  /^page-/,
+  /^nuxt/,
+  /^scale/,
+  /^slide/,
+  /^enter/,
+  /^leave/
+]
+
 const SiteUrl =
   process.env.NODE_ENV === 'production'
     ? siteConfig.url
@@ -108,10 +121,19 @@ export default {
     'nuxt-purgecss',
     'nuxt-fontawesome',
     'nuxt-webfontloader',
-    '@/modules/global-components'
+    '~/modules/global-components'
   ],
 
-  purgeCSS: purgeConfig,
+  purgeCSS: {
+    mode: 'postcss',
+    paths: [
+      path.join(__dirname, './src/pages/**/*.vue'),
+      path.join(__dirname, './src/layouts/**/*.vue'),
+      path.join(__dirname, './src/components/**/*.vue'),
+      path.join(__dirname, './src/plugins/**/*.js')
+    ],
+    whitelistPatterns: purgecssWhitelistPatterns
+  },
 
   webfontloader: {
     google: {
@@ -148,23 +170,25 @@ export default {
     generate: true
   },
 
-  /**
-   * Extend webpack build progress
-   * @see https://nuxtjs.org/api/configuration-build#extend
-   * @param {object} config Webpack configuration
-   * @param {object} param1 Nuxt context
-   */
-  extend(config, { isDev }) {
+  build: {
     /**
-     * Run eslint on save
+     * Extend webpack build progress
+     * @see https://nuxtjs.org/api/configuration-build#extend
+     * @param {object} config Webpack configuration
+     * @param {object} param1 Nuxt context
      */
-    if (isDev && process.client) {
-      siteConfig.module.rules.push({
-        enforce: 'pre',
-        test: /\.(js|vue)$/,
-        loader: 'eslint-loader',
-        exclude: /(node_modules)/
-      })
+    extend(config, { isDev }) {
+      /**
+       * Run eslint on save
+       */
+      if (isDev && process.client) {
+        siteConfig.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /(node_modules)/
+        })
+      }
     }
   }
 }
