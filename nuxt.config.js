@@ -3,6 +3,9 @@ import siteConfig from './config/site'
 import purgeConfig from './config/purgecss'
 import { colors } from './config/tailwind'
 
+const typographyConfig = require('./config/typography')
+const tailwindConfig = require('./config/tailwind')
+
 const purgecssWhitelistPatterns = [
   /^__/,
   /^fa-/,
@@ -171,6 +174,22 @@ export default {
   },
 
   build: {
+    postcss: {
+      plugins: {
+        tailwindcss: tailwindConfig,
+        'postcss-import': {},
+        'postcss-responsive-type': {},
+        'postcss-typography': typographyConfig,
+        'postcss-easing-gradients': {},
+        'postcss-animation': {},
+        'postcss-nested': {},
+        'postcss-preset-env': {},
+        'css-mqpacker': {
+          sort: true
+        },
+        autoprefixer: { grid: true }
+      }
+    },
     /**
      * Extend webpack build progress
      * @see https://nuxtjs.org/api/configuration-build#extend
