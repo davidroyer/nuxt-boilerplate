@@ -6,19 +6,6 @@ import { colors } from './config/tailwind'
 const typographyConfig = require('./config/typography')
 const tailwindConfig = require('./config/tailwind')
 
-const purgecssWhitelistPatterns = [
-  /^__/,
-  /^fa-/,
-  /^svg-/,
-  /^v-/,
-  /^page-/,
-  /^nuxt/,
-  /^scale/,
-  /^slide/,
-  /^enter/,
-  /^leave/
-]
-
 const SiteUrl =
   process.env.NODE_ENV === 'production'
     ? siteConfig.url

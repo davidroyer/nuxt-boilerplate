@@ -1,10 +1,11 @@
 <template>
-  <div itemscope itemtype="http://schema.org/Organization" itemprop="publisher">
-    <nuxt-link to="/" itemprop="url">
+  <div itemscope
+itemtype="http://schema.org/Organization" itemprop="publisher">
+    <NuxtLink to="/" itemprop="url">
       <span itemscope itemtype="http://schema.org/ImageObject" itemprop="logo">
         <img itemprop="url" class="logo-image" src="@/assets/images/logo.png" alt="Nuxt">
       </span>
-    </nuxt-link>
+    </NuxtLink>
   </div>
 </template>
 

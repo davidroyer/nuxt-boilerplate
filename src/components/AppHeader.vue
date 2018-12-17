@@ -1,7 +1,8 @@
 <template>
-  <header role="banner" itemscope itemtype="http://schema.org/WPHeader">
-    <app-logo />
-    <app-nav />
+  <header role="banner"
+itemscope itemtype="http://schema.org/WPHeader">
+    <AppLogo />
+    <AppNav />
   </header>
 </template>
 
