@@ -1,11 +1,21 @@
 import path from 'path'
 import siteConfig from './config/site'
-import purgeConfig from './config/purgecss'
 import { colors } from './config/tailwind'
 
 const typographyConfig = require('./config/typography')
 const tailwindConfig = require('./config/tailwind')
-
+const purgecssWhitelistPatterns = [
+  /^__/,
+  /^enter/,
+  /^fa-/,
+  /^leave/,
+  /^nuxt/,
+  /^page-/,
+  /^scale/,
+  /^slide/,
+  /^svg-/,
+  /^v-/
+]
 const SiteUrl =
   process.env.NODE_ENV === 'production'
     ? siteConfig.url

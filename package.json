@@ -19,7 +19,6 @@
     "serve": "http-server dist",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore ."
   },
-
   "devDependencies": {
     "autoprefixer": "^8.5.1",
     "babel-eslint": "^10.0.1",
@@ -31,6 +30,7 @@
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-vue": "^5.0.0",
     "glob-all": "^3.1.0",
+    "http-server": "^0.11.1",
     "husky": "^0.14.3",
     "lodash": "^4.17.11",
     "node-sass": "^4.9.4",
@@ -57,10 +57,10 @@
     "@nuxtjs/sitemap": "^0.1.1",
     "axios": "^0.18.0",
     "mkdirp": "^0.5.1",
-    "nuxt": "^2.1.0",
-    "nuxt-fontawesome": "^0.3.0",
-    "nuxt-purgecss": "^0.0.2",
-    "nuxt-webfontloader": "^1.0.0",
+    "nuxt": "latest",
+    "nuxt-fontawesome": "latest",
+    "nuxt-purgecss": "latest",
+    "nuxt-webfontloader": "latest",
     "postcss-typography": "^1.0.0",
     "readdirp": "^2.2.1",
     "tailwindcss": "^0.6.6",
