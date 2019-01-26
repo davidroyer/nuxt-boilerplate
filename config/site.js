@@ -8,7 +8,7 @@ module.exports = {
   ogImage: 'share.png',
 
   pathPrefix: '/', // Prefix for all links. If you deploy your site to example.com/portfolio your pathPrefix should be "/portfolio"
-  analyticsID: '123',
+  analyticsID: 'UA-56060335-6',
   shortName: 'Nuxt Boilerplate', // Alternative Site title for SEO
   // url: 'https://www.davidroyer.me', // Domain of your site. No trailing slash!
 
